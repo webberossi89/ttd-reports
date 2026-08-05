@@ -1,0 +1,37 @@
+# Source of truth for which campaigns get their own block in the 2026 Report
+# tab, and in what order. Blocks are laid out in this order, top to bottom.
+#
+# DO NOT hand-edit the layout anywhere else. build_campaign_tab.py reads this
+# file and derives BOTH the sheet layout AND the `sections:` block in
+# config.yaml from it, so the two can never drift apart.
+#
+# To add a campaign (Shapeshift clients live outside the Duo clients root, so
+# --clients-root is required):
+#
+#   cd ~/mcp/servers/google-ads
+#   uv run python3 ~/duo-reports/lead_tracker/build_campaign_tab.py \
+#     --clients-root ~/shapeshift-reports/report_clients \
+#     --client plitnick add <campaign_id> --title "SEARCH | ..." --apply
+#
+# `title` is the sheet block header AND the engine's section anchor. Changing
+# one changes both, which is the point.
+
+report_title: "Plitnick Plumbing & Heating | Paid Media Report"
+
+# Account campaign names carry a launch date and an "ss" suffix
+# ("Search - Air Conditioning 4.2.26 ss"), so derive_title() cannot split them
+# into a useful header. Titles are passed explicitly instead.
+strip_name_prefixes: ["PLITNICK"]
+
+# Ordered by spend: the two non-brand search campaigns carry ~90% of it and are
+# the ones the monthly decisions are actually about. Brand and PMax are cheap
+# and sit underneath.
+campaigns:
+  - id: "23713791800"
+    title: "SEARCH | AIR CONDITIONING"
+  - id: "23717837261"
+    title: "SEARCH | PROPANE DELIVERY"
+  - id: "23708352885"
+    title: "SEARCH | BRAND"
+  - id: "23049431034"
+    title: "PMAX | HOME FUEL"

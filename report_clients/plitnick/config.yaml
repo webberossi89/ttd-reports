@@ -1,0 +1,234 @@
+client: plitnick
+display_name: Plitnick Plumbing & Heating
+
+# Shapeshift Marketing client. CID 2308947370 sits under SSM MCC 697-370-3364,
+# reached through the TTD MCC (login_customer_id 5199864700 lives inside
+# ttd.yaml). ssm.yaml is unpopulated; Duo credentials cannot reach this account.
+ads_creds: ~/mcp/secrets/google-ads/ttd.yaml
+search_pmax_video_account: "2308947370"
+
+# No Local Services Ads on this account. The engine calls fetch_lsa
+# unconditionally, so this points at the same CID: it finds no LOCAL_SERVICES
+# campaigns, returns zeros, and no LSA section is listed below, so no LSA rows
+# are ever written.
+lsa_account: "2308947370"
+
+# Same durable-auth rule as Ford Piano: the sheet is shared with the service
+# account, not with a personal identity, so losing one login cannot break a
+# client report. Verified 2026-08-05 that this SA has read AND write on
+# "Plitnick Lead Sheet".
+sheets_creds: ~/.secrets/ga4/ttd-analytics-ga4-reader.json
+spreadsheet_id: "19xwER2sOuBFrZLbzhg5YTkyoHuihNhmnpbSlmzgTUg8"
+tab_name: "2026 Report"   # gid 1633390777, in "Plitnick Lead Sheet"
+
+# --------------------------------------------------------------------------
+# WHERE THE LEAD NUMBERS COME FROM, and why not from Google Ads conversions.
+# --------------------------------------------------------------------------
+# Same two-source shape as Ford Piano, for the same reason: neither source sees
+# all the leads on its own, and they never see the same one twice.
+#
+#   WEBSITE leads -> WhatConverts (profile 164949). Web forms plus calls to the
+#     dynamic-number pool. Every one carries a gclid, and WhatConverts is the
+#     only source that can say which was a form and which was a call. Jared
+#     confirmed 2026-06-04 that this profile captures BOTH forms and calls.
+#   AD CALLS -> Google Ads. A call placed from an ad or from the Maps listing
+#     never touches the site and carries no gclid, so it is invisible to any
+#     gclid-filtered WhatConverts pull.
+#
+# Spend / clicks / impressions always come from Google Ads.
+#
+# ** WHY BOTH CALL ACTIONS ARE BUCKETED, unlike Ford Piano **
+# On Ford, "Calls from ads" duplicates "Google Ads Call Extension" and is
+# excluded. On Plitnick they are DIFFERENT SURFACES and both count, per Jared's
+# 2026-07-08 determination which supersedes the 2026-06-04 double-count notes:
+#   "Calls from ads"            (AD_CALL 7319849700)      - the call button on an ad
+#   "Google Ads Call Extension" (UPLOAD_CALLS 7559233869) - calls placed from the
+#                                sponsored Maps/local listing, via the number
+#                                configured in Google Business Profile settings
+#
+# ** APRIL AND MAY PHONE LEADS ARE OVERSTATED - KNOWN, NOT A BUG **
+# Before the 2026-06-04 conversion cleanup this account had four overlapping
+# call/lead actions all counted at once. "Google Ads Call Extension" recorded
+# 67 in April and 71 in May under that setup, against 18 in June and 87 in July.
+# Daily data puts the real step-up on 13 July, after the Business Profile number
+# was connected to call tracking. So June is the artificially LOW month and
+# April/May are the artificially HIGH ones. Treat Apr-May phone leads as
+# indicative only; June onward is the clean series.
+#
+# "Leads (164949)" is deliberately NOT bucketed: it is the same set of website
+# leads WhatConverts supplies below, so bucketing it too would double every one.
+# "TechSol - contact us from submit 11607" is likewise absent - it is the site
+# contact form, which WhatConverts already captures.
+#
+# "Clicks to call" (GOOGLE_HOSTED 7322410703) is a system action with
+# include_in_conversions_metric already false; it never reaches the buckets.
+# ** THEY OVERLAP AFTER ALL - ONLY ONE IS BUCKETED. Measured 2026-08-05. **
+# Summing both was tried and is provably wrong. July 2026: "Calls from ads" 122
+# + "Google Ads Call Extension" 87 = 209 paid calls, against WhatConverts
+# recording just 213 phone leads from EVERY source combined (organic, direct,
+# Maps and paid) and only 132 labelled paid. 209 paid calls cannot fit inside
+# 213 total, so the two actions are counting the same calls twice - which is
+# what the 2026-06-04 audit originally found ("54.5 dup of ad-button calls").
+# Jared's 2026-07-08 note that they are different surfaces holds for the Maps
+# number itself, but not to the point of making them disjoint.
+#
+# So only ONE is bucketed, same as Ford Piano. Call Extension is kept because
+# it is the action that captures Maps-listing calls, which WhatConverts cannot
+# see (they carry no gclid). "Calls from ads" is dropped as the duplicate.
+#
+# ** CONFIRMED by Jared 2026-08-05 ** after being shown all three options and
+# what each does to Total Leads. Rejected: WhatConverts-gclid-only (stable at
+# 22/17/23/17 across Apr-Jul but a floor, since ad-button and Maps calls never
+# touch the site) and "Calls from ads"+WC (203/89/113/139, and April's 186 is
+# implausible). This option was chosen because the PER-CAMPAIGN split is
+# trustworthy: Google attributes every conversion to a campaign, whereas
+# WhatConverts dumps most gclid-less paid calls into "Brand".
+#
+# THE COST OF THAT CHOICE, and it must be stated in any client-facing writeup:
+# Total Leads reads 89 / 88 / 41 / 104 for Apr-Jul. June is artificially LOW and
+# April/May artificially HIGH, because this action recorded 67/71/18/87 across
+# those months as it was demoted in the June cleanup and restored in July.
+# August 2026 is the first month comparable to July on a like-for-like basis.
+conversion_action_buckets:
+  form: []
+  phone:
+    - Google Ads Call Extension
+
+wc_lead_source:
+  creds: ~/shapeshift-reports/.secrets/whatconverts.env
+  profile_id: 164949            # "Plitnick" under Shapeshift account 87660
+  lead_source: google           # this is a Google Ads report; drop the stray facebook lead
+  require_gclid: true           # ad-click-attributed leads only, see above
+  # Both filters, not either. A gclid outlives the click that set it, so a
+  # repeat visitor arriving later from the Business Profile still carries one.
+  # This matters more here than on Ford: July 2026 had 136 google/cpc leads but
+  # only 29 with a gclid, because the Maps tracking number books calls as cpc
+  # with no click behind them. Those are counted once, from Google Ads, in the
+  # phone bucket above - not twice.
+  lead_mediums: ["cpc", "ppc", "paid"]
+  unique_only: true             # repeat callers are not new leads
+  mode: add                     # ADD to the ad-call count above, do not replace it
+  # Campaign-keyed, not channel-keyed: four campaigns, so each block gets its
+  # own real lead count. Matched on utm_campaign OR on gad_campaignid in the
+  # landing URL, which is how sitelink/promotion-extension leads arrive.
+  # Unmapped leads are FATAL by design - see the QA row for the spend twin.
+  campaign_sections:
+    "SEARCH | AIR CONDITIONING": ["Air+Conditioning", "AC", "Air Conditioning"]
+    "SEARCH | PROPANE DELIVERY": ["Propane Delivery", "Propane"]
+    "SEARCH | BRAND": ["Brand"]
+    "PMAX | HOME FUEL": ["Pmax", "PMax", "Performance Max"]
+  # ** A SECOND ADVERTISER IS RUNNING GOOGLE ADS TO plitnick.com **
+  # Discovered 2026-08-05. Some paid leads land carrying
+  # gad_campaignid=23058133850, a campaign that does NOT exist in CID
+  # 2308947370 - confirmed by listing every campaign in the account including
+  # REMOVED, which returns only our four. So a Google Ads account Shapeshift
+  # does not manage is buying clicks to this site. Volume of gclid-bearing
+  # unique paid leads it produced: 12 in April, 6 in May, 1 in June, 5 in July.
+  #
+  # They are real leads and they are genuinely paid, but they are NOT ours, and
+  # crediting them to a Shapeshift campaign block would overstate this report.
+  # allow_unmapped drops them from the campaign blocks by design. The engine
+  # still prints every one to the run log, so the exclusion stays visible and
+  # this can never become a silent haircut.
+  #
+  # UNRESOLVED, for Jared: whose account is it? Thryv is the obvious candidate
+  # since it hosts the site and already runs a call-tracking number here, but
+  # that is a guess and has not been confirmed. Until it is, the QA row below
+  # only reconciles OUR spend; it cannot see theirs.
+  allow_unmapped: true
+
+# Sections are keyed on CAMPAIGN, not channel. A channel-level "Google Ads
+# Search" row averages every campaign into a number that stops meaning anything
+# the moment the account runs more than one - and this account runs four with
+# wildly different economics ($18.35 CPC on air conditioning against $0.46 on
+# brand in July 2026).
+#
+# IDs, not names, so a campaign rename can never silently zero a row. Every id
+# is validated against the live account at run time; a typo'd or deleted id
+# fails the run loudly instead of writing zeros. The tradeoff is that a NEW
+# campaign is not picked up automatically, which is what the QA unmapped-spend
+# row exists to catch.
+#
+# EVERYTHING BETWEEN THE MARKERS BELOW IS GENERATED from campaigns.yaml by
+# build_campaign_tab.py, which also lays out the sheet, so the two can never
+# drift apart. Do not hand-edit it.
+# >>> BEGIN GENERATED SECTIONS (build_campaign_tab.py) - do not hand-edit
+# Derived from campaigns.yaml. Anchors match col A of the tab exactly.
+sections:
+  - anchor: "SEARCH | AIR CONDITIONING"
+    campaign_ids: ["23713791800"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  - anchor: "SEARCH | PROPANE DELIVERY"
+    campaign_ids: ["23717837261"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  - anchor: "SEARCH | BRAND"
+    campaign_ids: ["23708352885"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  - anchor: "PMAX | HOME FUEL"
+    campaign_ids: ["23049431034"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  # QA block. `__all_campaigns__` is total cost across EVERY campaign in
+  # the account on any channel, mapped here or not. The sheet subtracts
+  # the sum of the campaign blocks from it; that row must read $0.00.
+  - anchor: "QA | UNMAPPED SPEND CHECK"
+    data_from: "__all_campaigns__"
+    inputs:
+      1: cost
+# <<< END GENERATED SECTIONS
+
+# The TOTAL PAID MEDIA block is entirely sheet formulas summing the campaign
+# blocks, so it is deliberately absent above. Every derived number (CTR, CPC,
+# Total Leads, Conv Rate, CPL) is likewise a formula: the engine writes only
+# raw rows, so a derived cell can never disagree with its own inputs.
+
+# Verified against the Google Ads API 2026-08-05 for July 2026.
+validation:
+  "2026-07":
+    "SEARCH | AIR CONDITIONING":
+      clicks: 114
+      impressions: 3248
+      cost: 2092.42
+    "SEARCH | PROPANE DELIVERY":
+      clicks: 92
+      impressions: 2109
+      cost: 819.31
+    "SEARCH | BRAND":
+      clicks: 329
+      impressions: 788
+      cost: 151.90
+    "PMAX | HOME FUEL":
+      clicks: 127
+      impressions: 2733
+      cost: 152.19
+
+currency_offsets: [4]
+lsa_currency_offsets: [2]
+
+# No hand-entered cells anywhere in the tab, so the monthly close-out may
+# force-overwrite. Without this, activity landing after the last MTD refresh
+# freezes as a stale value the protected close-out would skip forever.
+fully_automated: true
