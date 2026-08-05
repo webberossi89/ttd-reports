@@ -506,12 +506,23 @@
     </div>
     <div class="prose">
       <p>
-        In early July we connected your Google Business Profile phone number to call
-        tracking. From that point on, calls placed from your Google Maps listing
-        started being recorded. They were always happening &mdash; we simply could not
-        see them before. <strong>Those newly visible calls account for 69 of the 99
-        extra conversions.</strong> They are not new business; they are business that
-        was previously invisible.
+        The reason is how one conversion type was being counted. Calls placed from your
+        Google Maps listing are recorded separately from calls placed on an ad. In early
+        June that Maps figure was pulled out of the counted column while we untangled
+        some double-counting between your call tracking actions. In July it was restored,
+        and your Business Profile number was connected to call tracking &mdash; the daily
+        figures show the step up on <strong>13 July</strong>.
+        <strong>Between them, Maps calls account for 69 of the 99 extra
+        conversions.</strong>
+      </p>
+      <p>
+        To be precise about what that is and is not: those calls were being counted
+        earlier in the year too, at 67 in April and 71 in May. So this is not a hidden
+        channel we have just discovered. June was the artificially low month, and July is
+        the first month it has been counted properly since the double-counting was fixed.
+        Part of the July rise is likely to be genuinely more Maps calls following the
+        tracking connection, but we cannot cleanly separate how much, and we are not
+        going to guess.
       </p>
       <p>
         Strip that change out and compare like with like: conversions went from 120.5
@@ -552,8 +563,8 @@
       </div>
       <div class="legend" id="legend-conv"></div>
       <figcaption>
-        Conversions by source, June against July. The third pair is the change:
-        calls from your Maps listing went from barely tracked to fully tracked.
+        Conversions by source, June against July. The second pair is the change: Maps
+        listing calls went from mostly uncounted in June to fully counted in July.
         Everything else moved gently.
       </figcaption>
     </figure>
@@ -891,7 +902,7 @@
     <ul>
       <li>&mdash; The &ldquo;Qualified lead&rdquo;, &ldquo;Appointment booked&rdquo; and &ldquo;Deal closed&rdquo; columns on the lead sheet are still unticked across all 223 July leads, so nothing in this report claims a booking or a sale. Those columns default to unticked and have not yet been reviewed.</li>
       <li>&mdash; Conversion counts include phone calls, which Google credits to the day of the click rather than the day of the call. Small differences against your own phone records are normal.</li>
-      <li>&mdash; The Maps call tracking change described on this page took effect in early July, so it affects part of the month rather than all of it. The true like-for-like gap is therefore slightly wider than stated, not narrower.</li>
+      <li>&mdash; The Maps call counting change described on this page steps up on 13 July, so it affects roughly the second half of the month rather than all of it. Earlier in the year the same figure ran at 67 in April and 71 in May, under a setup later found to be double-counting; June, at 18, is the outlier rather than July.</li>
       <li>&mdash; Average position is an average across every search you appeared for, including ones you do not care about. It is a trend indicator, not a scoreboard.</li>
     </ul>
     <p style="margin-top:1rem">Prepared by Shapeshift Marketing &middot; 5 August 2026</p>
@@ -966,8 +977,8 @@ const REPORT = {
     ]
   },
   done: [
-    { title: "Connected your Business Profile phone number to call tracking", date: "Early July",
-      body: "The change behind most of this report. Calls placed straight from your Google Maps listing are now recorded and attributed. 87 of them in July, against 18 in June." },
+    { title: "Connected your Business Profile phone number to call tracking", date: "Mid July",
+      body: "Calls placed straight from your Google Maps listing are recorded and attributed again, after the June double-counting fix had taken them out of the counted column. 87 in July against 18 in June, with the daily step up landing on 13 July." },
     { title: "Blocked competitor and out-of-area searches", date: "8 July",
       body: "Added negative keywords to the air conditioning and propane campaigns covering competitor names and off-target searches such as grill-cylinder refills. Roughly $346 a month of wasted spend blocked." },
     { title: "Built the ad extensions that were missing entirely", date: "8 July",

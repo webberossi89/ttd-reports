@@ -160,6 +160,23 @@ cat > "$SITE/404.html" <<'NF'
 </html>
 NF
 
+# GUARD: wrangler uploads a whole directory as the deployment, so deploying a
+# staging dir that is missing a client silently deletes that client from the live
+# site. Compare against what is actually live and refuse rather than wipe.
+# This is the failure a fresh clone on another machine would otherwise walk into.
+for known in $(cat "$ROOT/.deployed-clients" 2>/dev/null); do
+  if [[ ! -d "$SITE/$known" ]]; then
+    echo "REFUSING TO DEPLOY: '$known' is live but missing from $SITE" >&2
+    echo "Deploying now would delete it from the site. Restore the staging dir" >&2
+    echo "(git pull in this repo) before publishing, or remove it from" >&2
+    echo "$ROOT/.deployed-clients if it is meant to be gone." >&2
+    exit 1
+  fi
+done
+
+# Record what this deploy contains, so the next run can detect a missing client.
+find "$SITE" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort > "$ROOT/.deployed-clients"
+
 echo "site contents:"
 find "$SITE" -name index.html | sed "s|$SITE|  .|" | sort
 
