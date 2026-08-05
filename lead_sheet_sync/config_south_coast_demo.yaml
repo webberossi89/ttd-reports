@@ -1,0 +1,56 @@
+# South Coast Demo lead-sheet sync (replaces the Zapier WhatConverts -> Sheet Zap).
+# Added 2026-07-31, alongside the YouForm -> WhatConverts rebuild in
+# ~/shapeshift-reports/youform_wc_sync/ (that one runs first each cycle).
+#
+# The sheet is the client's own disposition workbook: Cory edits the
+# Qualified / Appointment / Deal Closed / Notes columns by hand, so we only
+# ever prepend new rows at row 2 and never touch existing ones.
+display_name: "South Coast Demo"
+
+# WhatConverts source
+wc_creds: ~/shapeshift-reports/.secrets/whatconverts.env
+wc_profile_id: 134236
+
+# Destination Google Sheet ("South Coast Demo Lead Sheet")
+spreadsheet_id: "1HCf0YVZQis-bxT6HM77lHr5SZU6qpaObPmuL_oz30Y8"
+tab_name: "Sheet1"
+sheets_creds: ~/.secrets/ga4/ttd-analytics-ga4-reader.json   # service-account JSON
+
+# Behaviour
+lookback_days: 3
+summary_wait_minutes: 25
+# Unique-only, matching what the retired Zap wrote for this client. Verified
+# 2026-07-31 against May 1 - Jul 31: all 30 Unique leads present in the sheet,
+# 0 of 13 Repeat leads present.
+include_repeat: false
+include_spam: false
+
+# Never write these to the client's sheet. Dedup keys on Lead IDs read from the
+# sheet, so without this an excluded row would be re-added on the next poll.
+# 250044959 = attribution end-to-end test, 2026-07-31 (WhatConverts has no
+# delete endpoint, so the lead itself can only be removed in the WC UI).
+exclude_lead_ids:
+  - 250044959
+
+# Fixed column order of the destination sheet (A..R). Note the sheet's own
+# header for column O is "Content " with a trailing space; build_row() strips
+# column names before matching, so it resolves correctly. Do not reorder.
+columns:
+  - "Lead ID"
+  - "Contact Name"
+  - "Email Address"
+  - "Phone Number"
+  - "Time"
+  - "Lead Type"
+  - "Message"
+  - "Qualified Lead?"
+  - "Appointment Booked?"
+  - "Deal Closed?"
+  - "Notes"
+  - "Source"
+  - "Medium"
+  - "Campaign"
+  - "Content"
+  - "Keyword"
+  - "GCLID"
+  - "Referring site"

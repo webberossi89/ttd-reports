@@ -1,0 +1,14 @@
+# Credentials never go in git. Record where they live, not what they are.
+.secrets/
+*.env
+!*.env.example
+**/keys/
+*service-account*.json
+*credentials*.json
+
+# Churn and regenerable output
+logs/
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store

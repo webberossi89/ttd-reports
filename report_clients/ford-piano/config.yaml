@@ -1,0 +1,157 @@
+client: ford-piano
+display_name: Ford Piano
+
+# Shapeshift Marketing client. CID 3967038207 sits under SSM MCC 697-370-3364,
+# reached through the TTD MCC (login_customer_id 5199864700 lives inside
+# ttd.yaml). Duo credentials are deliberately NOT usable here.
+ads_creds: ~/mcp/secrets/google-ads/ttd.yaml
+search_pmax_video_account: "3967038207"
+
+# No Local Services Ads on this account. The engine calls fetch_lsa
+# unconditionally, so this points at the same CID: it finds no LOCAL_SERVICES
+# campaigns, returns zeros, and no LSA section is listed below, so no LSA rows
+# are ever written.
+lsa_account: "3967038207"
+
+# The sheet is owned by jaredwebber1989 and shared with the service account
+# ga4-reader@ttd-analytics-500221.iam.gserviceaccount.com, NOT with
+# jared@goduo.co. Durable auth per the same rule as the Ford Piano lead-sheet
+# sync: losing the goduo identity must not break a Shapeshift client.
+sheets_creds: ~/.secrets/ga4/ttd-analytics-ga4-reader.json
+spreadsheet_id: "1aJTo20E3EPnjZb9g5fR2FNmu3sr-plsz0ByhV3ZGUow"
+tab_name: "2026 Report"   # gid 2044146716, in "Ford Piano Lead Sheet"
+
+# --------------------------------------------------------------------------
+# WHERE THE LEAD NUMBERS COME FROM, and why not from Google Ads conversions.
+# --------------------------------------------------------------------------
+# This account cannot produce a Form/Phone split on its own. Its only working
+# lead action is "WC All Leads (168410)" (UPLOAD_CLICKS), a single MIXED bucket
+# holding both web forms and phone calls; the GA4 twins
+# "Ford Piano Website (web) web_form_unique" / "phone_call_unique" are enabled
+# and primary but recorded ZERO conversions in July 2026, and "Calls from ads"
+# (AD_CALL) duplicates "Google Ads Call Extension" (UPLOAD_CALLS).
+#
+# So the two sources are SUMMED (`mode: add`), because neither sees all the
+# leads on its own and they never see the same one twice:
+#
+#   WEBSITE leads -> WhatConverts. Web forms plus calls to the dynamic-number
+#     pool. Every one carries a gclid, and WhatConverts is the only source that
+#     can say which was a form and which was a call.
+#   AD CALLS -> Google Ads, action "Google Ads Call Extension". A call placed
+#     straight from the ad's call asset never touches the site and carries no
+#     gclid, so it is invisible to any gclid-filtered WhatConverts pull.
+#
+# Spend / clicks / impressions always come from Google Ads.
+#
+# July 2026 reconciles exactly: 18 unique gclid WhatConverts leads (6 form +
+# 12 phone) + 2 call-extension calls = 20, and Google Ads recorded 18 on
+# "WC All Leads" plus those same 2.
+#
+# ** WHY THE SHEET READS 20 AND THE GOOGLE ADS UI READS 21 **
+# "Calls from ads" (AD_CALL) fired once on 2026-07-28, the same day and the
+# same single call-extension call that "Google Ads Call Extension" recorded;
+# WhatConverts logged exactly ONE call to the call-extension number
+# (+1 914-491-5130) that day, from +1 914-582-6159. It is one phone call
+# counted twice by two overlapping actions, so "Calls from ads" is deliberately
+# NOT bucketed here. This confirms the double-count flagged in the 2026-08-04
+# account audit.
+#
+# require_gclid + lead_mediums keep robocalls out: WhatConverts labels a lead
+# google/cpc from session data alone, and July 2026 had 29 google/cpc leads
+# against 20 with a gclid, the 9 without including the 5 fake "Google Ads Team"
+# calls from +1 313-483-9122. unique_only drops repeat callers, which is what
+# WhatConverts itself uploads to Google Ads (20 gclid leads, 18 unique, and
+# Google Ads recorded 18).
+#
+# Known and accepted: WhatConverts buckets by lead date, Google Ads by click
+# date, so a lead either side of a month boundary can land in different months
+# in the two systems. Immaterial at this volume.
+conversion_action_buckets:
+  # No form action fires on this account. The GA4 twins
+  # "Ford Piano Website (web) web_form_unique" / "phone_call_unique" are
+  # enabled and primary and recorded ZERO conversions in July 2026; forms come
+  # from WhatConverts below.
+  form: []
+  # Ad-call-asset calls only. "WC All Leads (168410)" is deliberately absent:
+  # it is the same set of website leads WhatConverts supplies below, so
+  # bucketing it too would double every one of them. "Calls from ads" is
+  # absent because it duplicates this action, see above.
+  phone:
+    - Google Ads Call Extension
+
+wc_lead_source:
+  creds: ~/shapeshift-reports/.secrets/whatconverts.env
+  profile_id: 168410            # "Ford Piano" under Shapeshift account 87660
+  lead_source: google           # drop the odd facebook/cpc lead; this is a Google Ads report
+  require_gclid: true           # ad-click-attributed leads only, see above
+  # Both filters, not either. A gclid outlives the click that set it, so a
+  # repeat visitor arriving later from the Google Business Profile still
+  # carries one (2026-08-04 phone call, lead_campaign "GoogleMyBusiness").
+  # gclid alone would book that as a paid lead.
+  lead_mediums: ["cpc", "ppc", "paid"]
+  unique_only: true             # repeat callers are not new leads, and WC uploads only uniques
+  mode: add                     # ADD to the call-extension count above, do not replace it
+  section: "SEARCH | PIANO REPAIR & REBUILDING"   # single campaign, so one block takes them all
+
+# Sections are keyed on CAMPAIGN, not channel, the same shape as the Duo
+# clients (Rolling Hills, 768 Roofing). A channel-level "Google Ads Search" row
+# averages every campaign into a number that stops meaning anything the moment
+# the account runs more than one.
+#
+# IDs, not names, so a campaign rename can never silently zero a row. Every id
+# is validated against the live account at run time; a typo'd or deleted id
+# fails the run loudly instead of writing zeros. The tradeoff is that a NEW
+# campaign is not picked up automatically, which is what the QA unmapped-spend
+# row exists to catch.
+#
+# EVERYTHING BETWEEN THE MARKERS BELOW IS GENERATED from campaigns.yaml by
+# build_campaign_tab.py, which also lays out the sheet, so the two can never
+# drift apart. Do not hand-edit it.
+# >>> BEGIN GENERATED SECTIONS (build_campaign_tab.py) - do not hand-edit
+# Derived from campaigns.yaml. Anchors match col A of the tab exactly.
+sections:
+  - anchor: "SEARCH | PIANO REPAIR & REBUILDING"
+    campaign_ids: ["23883535091"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  # QA block. `__all_campaigns__` is total cost across EVERY campaign in
+  # the account on any channel, mapped here or not. The sheet subtracts
+  # the sum of the campaign blocks from it; that row must read $0.00.
+  - anchor: "QA | UNMAPPED SPEND CHECK"
+    data_from: "__all_campaigns__"
+    inputs:
+      1: cost
+# <<< END GENERATED SECTIONS
+
+# The TOTAL PAID MEDIA block is entirely sheet formulas summing the campaign
+# blocks, so it is deliberately absent here. Every derived number (CTR, CPC,
+# Total Leads, Conv Rate, CPL) is likewise a formula: the engine writes only
+# raw rows, so a derived cell can never disagree with its own inputs.
+
+# July 2026 is the first full month the campaign ran, reconciled lead by lead
+# against both sources: Google Ads 158 clicks / 1,124 impr / $463.53, and
+# 20 leads = 18 unique gclid WhatConverts leads (6 form + 12 phone) + 2
+# "Google Ads Call Extension" calls. The Google Ads UI reads 21 because the
+# 2026-07-28 ad call is counted by both "Google Ads Call Extension" and
+# "Calls from ads"; see the note above the buckets.
+validation:
+  "2026-07":
+    "SEARCH | PIANO REPAIR & REBUILDING":
+      clicks: 158
+      impressions: 1124
+      cost: 463.53
+      form_leads: 6
+      phone_leads: 14
+
+currency_offsets: [4]
+lsa_currency_offsets: [2]
+
+# No hand-entered cells anywhere in the tab, so the monthly close-out may
+# force-overwrite. Without this, activity landing after the last MTD refresh
+# freezes as a stale value the protected close-out would skip forever.
+fully_automated: true

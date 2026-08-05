@@ -1,0 +1,27 @@
+# Source of truth for which campaigns get their own block in the 2026 Report
+# tab, and in what order. Blocks are laid out in this order, top to bottom.
+#
+# DO NOT hand-edit the layout anywhere else. build_campaign_tab.py reads this
+# file and derives BOTH the sheet layout AND the `sections:` block in
+# config.yaml from it, so the two can never drift apart.
+#
+# To add a campaign:
+#
+#   cd ~/mcp/servers/google-ads
+#   uv run python3 ~/duo-reports/lead_tracker/build_campaign_tab.py \
+#     --clients-root ~/shapeshift-reports/report_clients \
+#     --client h-and-h add <campaign_id> --title "SEARCH | ..." --apply
+
+report_title: "H&H Signature Renovations | Paid Media Report"
+
+# The account's one campaign is named "Search - Kitchen/Bath SS 5.1.26", which
+# has no pipes for derive_title() to split on, so the title is passed
+# explicitly. "Kitchen/Bath" is the campaign's scope on paper only: the Kitchen
+# Remodel ad group has been PAUSED since June and the campaign has run
+# bathroom-only since. If Kitchen is ever relaunched as its own campaign, add
+# it as a second block rather than widening this one.
+strip_name_prefixes: []
+
+campaigns:
+  - id: "23811011948"
+    title: "SEARCH | KITCHEN & BATH REMODELING"

@@ -1,0 +1,36 @@
+<!-- SCD-ATTR-PERSIST: keeps gclid/utm across internal navigation so a visitor who
+     lands on a paid page and later submits the form on another page stays attributed.
+     Live URL params still win: embed.js applies data-params first, then
+     data-parent-params, so a fresh click always overrides stored values. -->
+<script>
+(function(){
+  var KEYS=['gclid','gbraid','wbraid','msclkid','fbclid','utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
+  var STORE='scd_attr', TTL=7776000000; /* 90 days */
+  function store(v){ try{ localStorage.setItem(STORE,JSON.stringify({t:Date.now(),v:v})); }catch(e){}
+    try{ document.cookie=STORE+'='+encodeURIComponent(JSON.stringify(v))+';path=/;max-age=7776000;SameSite=Lax'; }catch(e){} }
+  function load(){
+    try{ var raw=localStorage.getItem(STORE);
+      if(raw){ var o=JSON.parse(raw); if(o&&o.t&&(Date.now()-o.t)<=TTL&&o.v) return o.v; } }catch(e){}
+    try{ var m=document.cookie.match(/(?:^|;\s*)scd_attr=([^;]*)/);
+      if(m) return JSON.parse(decodeURIComponent(m[1])); }catch(e){}
+    return null;
+  }
+  /* 1. Capture: any param-bearing visit overwrites storage (last click wins). */
+  var q, cur=null;
+  try{ q=new URLSearchParams(window.location.search); }catch(e){ return; }
+  for(var i=0;i<KEYS.length;i++){ var val=q.get(KEYS[i]); if(val){ (cur=cur||{})[KEYS[i]]=val; } }
+  if(cur){ store(cur); return; } /* live URL already covered by data-parent-params */
+  /* 2. Apply: no params on this URL, so fall back to what we stored earlier. */
+  var saved=load(); if(!saved) return;
+  var qs=[]; for(var j=0;j<KEYS.length;j++){ var k=KEYS[j];
+    if(saved[k]) qs.push(encodeURIComponent(k)+'='+encodeURIComponent(saved[k])); }
+  if(!qs.length) return;
+  var s=qs.join('&');
+  var apply=function(){
+    var els=document.querySelectorAll('[data-youform-embed]');
+    for(var n=0;n<els.length;n++){ if(!els[n].getAttribute('data-params')) els[n].setAttribute('data-params',s); }
+  };
+  apply();
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',apply); }
+})();
+</script>

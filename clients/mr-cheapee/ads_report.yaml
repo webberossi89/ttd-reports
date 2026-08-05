@@ -1,0 +1,72 @@
+display_name: "Mr Cheapee Inc"
+
+# Google Ads source (SSM client under the TTD MCC).
+google_ads:
+  customer_id: "9840073011"
+  creds: /home/jared/mcp/secrets/google-ads/ttd.yaml   # login_customer_id 5199864700 inside
+
+# WhatConverts source for the Form/Phone lead split (lead_type) and LSA leads.
+wc_creds: ~/shapeshift-reports/.secrets/whatconverts.env
+wc_profile_id: 157053
+wc_date_field: date_created
+
+# Target: "Mr Cheapee Monthly Report" workbook, year tab.
+spreadsheet_id: "120h6Qg9RKFzysSVTciQGJeB0Rv5SXqaqDcAh6ghNqvU"
+tab_name: "2026"
+year: 2026
+
+# Month columns on the tab: B=Jan .. M=Dec (column index == month number).
+# Only the RAW-INPUT rows below are written; all CTR/CPC/CPL/Total formula
+# rows and the manual "Qualified Leads" / Microsoft / PMax rows are left
+# untouched.
+sections:
+  # Google Ads Search section. clicks/impr/cost from Google Ads (channel
+  # SEARCH); form/phone from WhatConverts lead_type within the ppc bucket.
+  search:
+    google_ads_channel: SEARCH
+    wc_channel: ppc
+    rows:
+      clicks: 4
+      impressions: 5
+      cost: 7
+      form_leads: 9
+      phone_leads: 10
+      # "Qualified Leads" row under Total Paid Search (= paid search qualified;
+      # Mr Cheapee's Total Paid Search is Search-only). Unique + quotable=Yes.
+      qualified_leads: 50
+  # Local Services Ads. cost from Google Ads (channel LOCAL_SERVICES);
+  # leads from WhatConverts lsa bucket (all phone).
+  lsa:
+    google_ads_channel: LOCAL_SERVICES
+    wc_channel: lsa
+    rows:
+      leads: 53
+      cost: 54
+      qualified_leads: 56   # new row added below LSA CPL; unique + quotable=Yes
+    row_labels:
+      56: "Qualified Leads"
+
+# WhatConverts channel classification. Mirrors the lead_tracker config so the
+# ppc / lsa buckets line up exactly with the existing Mr Cheapee tracker.
+classification_rules:
+  seo_gbp:
+    - {phone_name: "gbp"}
+    - {phone_name: "google business"}
+    - {phone_name: "google my business"}
+    - {phone_name: "gmb"}
+    - {lead_source: "gmb"}
+    - {lead_campaign: "gbp - direct call"}
+  lsa:
+    - {lead_campaign: "lsa"}
+  ppc:
+    - {lead_medium: ["cpc", "ppc", "paid"]}
+    - {phone_name: ["google ads", "google call extension", "google call asset", "meta", "facebook"]}
+  seo_organic:
+    - {lead_medium: "organic"}
+    - {lead_source: ["google", "bing", "yahoo", "duckduckgo", "ecosia"]}
+  direct:
+    - {lead_source: ["(direct)", "website"]}
+    - {lead_medium: "direct"}
+  referral:
+    - {lead_medium: ["referral", "email", "social"]}
+    - {lead_source: "chatgpt"}

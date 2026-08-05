@@ -1,0 +1,38 @@
+# MCI Waste lead-sheet sync (WhatConverts -> Google Sheet)
+display_name: "MCI Waste"
+
+# WhatConverts source
+wc_creds: ~/shapeshift-reports/.secrets/whatconverts.env
+wc_profile_id: 170414
+
+# Destination Google Sheet
+spreadsheet_id: "1N9oB7RrceWlGfm2qtq_0wa1xSecXu5pZk40b-Il9CR4"
+tab_name: "All Leads"      # gid=0 (renamed from Sheet1 2026-06-29)
+sheets_creds: ~/recnation/lsa-refresh/.secrets/sheets.yaml
+
+# Behaviour
+lookback_days: 3           # how far back each poll looks for new leads
+summary_wait_minutes: 25   # for phone calls, wait this long for the AI Lead Summary
+include_repeat: true       # include WhatConverts "Repeat" leads (return callers)
+include_spam: false        # skip leads WhatConverts flagged as spam
+
+# Fixed column order of the destination sheet (A..R). Do not reorder.
+columns:
+  - "Lead ID"
+  - "Contact Name"
+  - "Email Address"
+  - "Phone Number"
+  - "Time"
+  - "Lead Type"
+  - "Message"
+  - "Qualified Lead?"
+  - "Appointment Booked?"
+  - "Deal Closed?"
+  - "Notes"
+  - "Source"
+  - "Medium"
+  - "Campaign"
+  - "Content"
+  - "Keyword"
+  - "GCLID"
+  - "Referring site"

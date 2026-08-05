@@ -1,0 +1,43 @@
+# H&H Signature Renovations lead-sheet sync (Shapeshift). Newest leads prepended at row 2.
+# DURABLE AUTH: writes via the jaredwebber1989 service account (NOT goduo), per
+# Jared 2026-07-07. The sheet must be shared Editor with the SA email
+# ga4-reader@ttd-analytics-500221.iam.gserviceaccount.com and the Sheets API
+# enabled on project ttd-analytics-500221 (already enabled for Ford Piano).
+display_name: "H&H Signature Renovations"
+
+# WhatConverts source
+wc_creds: ~/shapeshift-reports/.secrets/whatconverts.env
+wc_profile_id: 167229
+
+# Destination Google Sheet
+spreadsheet_id: "1YQfyEiv26NVV_sdyYJbq8H3pcr9WYkSW_E53FIcj-uI"
+tab_name: "Sheet1"   # TODO: confirm exact tab title once sheet is shared (engine does exact match)
+sheets_creds: ~/.secrets/ga4/ttd-analytics-ga4-reader.json   # service-account JSON
+
+# Behaviour
+lookback_days: 3
+summary_wait_minutes: 25
+include_repeat: true
+include_spam: false
+qualified_from_quotable: true   # mirror WC quotable into the Qualified Lead? column
+
+# Fixed column order of the destination sheet (A..R). Do not reorder.
+columns:
+  - "Lead ID"
+  - "Contact Name"
+  - "Email Address"
+  - "Phone Number"
+  - "Time"
+  - "Lead Type"
+  - "Message"
+  - "Qualified Lead?"
+  - "Appointment Booked?"
+  - "Deal Closed?"
+  - "Notes"
+  - "Source"
+  - "Medium"
+  - "Campaign"
+  - "Content"
+  - "Keyword"
+  - "GCLID"
+  - "Referring site"

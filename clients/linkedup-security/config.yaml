@@ -1,0 +1,37 @@
+display_name: "LinkedUp Security"
+
+wc_creds: ~/shapeshift-reports/.secrets/whatconverts.env
+wc_profile_id: 165650
+wc_date_field: date_created
+
+spreadsheet_id: "1PMxbjV8GeANtw_uPd8pvCjSjIpRYPLxygWirZGkfqiE"
+tab_name: "LinkedUp Security"
+anchor_text: "Month"
+
+rows:
+  "Total Leads":   total
+  "SEO - Organic": seo_organic
+  "SEO - GBP":     seo_gbp
+  "PPC":           ppc
+  "Direct":        direct
+  "Referral":      referral
+
+classification_rules:
+  seo_gbp:
+    - {phone_name: "gbp"}
+    - {phone_name: "google business"}
+    - {phone_name: "google my business"}
+    - {phone_name: "gmb"}
+    - {lead_source: "gmb"}
+  ppc:
+    - {lead_medium: ["cpc", "ppc", "paid"]}
+    - {phone_name: ["google ads", "google call extension", "google call asset", "lsa", "meta", "facebook"]}
+  seo_organic:
+    - {lead_medium: "organic"}
+    - {lead_source: ["google", "bing", "yahoo", "duckduckgo", "ecosia"]}
+  direct:
+    - {lead_source: ["(direct)", "website"]}
+    - {lead_medium: "direct"}
+  referral:
+    - {lead_medium: ["referral", "email", "social"]}
+    - {lead_source: "chatgpt"}

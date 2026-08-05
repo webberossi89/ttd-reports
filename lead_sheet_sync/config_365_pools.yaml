@@ -1,0 +1,50 @@
+# 365 Pool Service lead-sheet sync (replaces the Zapier WhatConverts -> Sheet Zap,
+# which stopped writing after 2026-07-21). Added 2026-07-28.
+#
+# The destination sheet is the client's own disposition workbook: they edit the
+# Qualified / Appointment / Declined For Service Fee / Deal Closed / Notes columns
+# by hand, so we only ever prepend new rows and never touch existing ones.
+display_name: "365 Pool Service"
+
+# WhatConverts source
+wc_creds: ~/shapeshift-reports/.secrets/whatconverts.env
+wc_profile_id: 152166
+
+# Destination Google Sheet ("365 Pool Service Lead Sheet")
+# Sheet2 is a stale 2025 archive tab; the live tab is Sheet1.
+spreadsheet_id: "1AZT3FdCG595Rl-eYXLkKXXfOqrWEpLe9jtsplfSrr0Y"
+tab_name: "Sheet1"
+sheets_creds: ~/.secrets/ga4/ttd-analytics-ga4-reader.json   # service-account JSON
+
+# Behaviour
+lookback_days: 3
+summary_wait_minutes: 25
+# Unique-only, matching what the retired Zap wrote for this client's entire
+# history (verified 2026-07-28: all 171 Unique leads Jun 1 - Jul 21 present,
+# 0 of 73 Repeat leads present). Other clients use include_repeat: true.
+include_repeat: false
+include_spam: false
+
+# Fixed column order of the destination sheet (A..S). NOTE: this sheet has an
+# extra "Declined For Service Fee" column (col J) the other clients lack.
+# Do not reorder.
+columns:
+  - "Lead ID"
+  - "Contact Name"
+  - "Email Address"
+  - "Phone Number"
+  - "Time"
+  - "Lead Type"
+  - "Message"
+  - "Qualified Lead?"
+  - "Appointment Booked?"
+  - "Declined For Service Fee"
+  - "Deal Closed?"
+  - "Notes"
+  - "Source"
+  - "Medium"
+  - "Campaign"
+  - "Content"
+  - "Keyword"
+  - "GCLID"
+  - "Referring site"
