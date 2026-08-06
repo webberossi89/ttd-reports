@@ -1,0 +1,196 @@
+client: south-coast-demo
+display_name: South Coast Demolition
+
+# Shapeshift Marketing client. CID 3562898662 sits under SSM MCC 697-370-3364,
+# reached through the TTD MCC (login_customer_id 5199864700 lives inside
+# ttd.yaml). Duo credentials cannot reach this account.
+ads_creds: ~/mcp/secrets/google-ads/ttd.yaml
+search_pmax_video_account: "3562898662"
+
+# No Local Services Ads on this account. The engine calls fetch_lsa
+# unconditionally, so this points at the same CID: it finds no LOCAL_SERVICES
+# campaigns, returns zeros, and no LSA section is listed below, so no LSA rows
+# are ever written.
+lsa_account: "3562898662"
+
+# Same durable-auth rule as Ford Piano and Plitnick: the sheet is shared with
+# the service account, not with a personal identity, so losing one login cannot
+# break a client report. This is the SAME workbook the client's own lead feed
+# writes into (lead_sheet_sync/config_south_coast_demo.yaml -> tab "Sheet1"),
+# and that sync already writes with this service account, so access is proven.
+sheets_creds: ~/.secrets/ga4/ttd-analytics-ga4-reader.json
+spreadsheet_id: "1HCf0YVZQis-bxT6HM77lHr5SZU6qpaObPmuL_oz30Y8"
+tab_name: "2026 Report"   # gid 1097251662, in "South Coast Demo Lead Sheet"
+
+# --------------------------------------------------------------------------
+# WHERE THE LEAD NUMBERS COME FROM, and why the two sources are summed.
+# --------------------------------------------------------------------------
+# Same two-source shape as Ford Piano, and it was proved on this account rather
+# than assumed. Every paid lead this account has ever produced falls into
+# exactly one of two buckets, and the two are provably disjoint:
+#
+#   WEBSITE leads -> WhatConverts (profile 134236), tracking number pool
+#     "All Traffic" plus web forms. Every one of these carries a gclid.
+#   AD-CALL-ASSET calls -> WhatConverts number "Google Ads Call Extension".
+#     These never touch the site, so they carry NO gclid and no landing_url,
+#     and WhatConverts cannot say which campaign they belong to (it labels them
+#     lead_campaign "General"). Google Ads can, because it uploaded them.
+#
+# Measured over Jan 1 - Aug 4 2026, across every paid lead in profile 134236:
+#     phone_name "All Traffic"               gclid=True   18
+#     phone_name "All Traffic"               gclid=False   1
+#     phone_name "Google Ads Call Extension" gclid=False  14
+#     web form   (phone_name null)           gclid=True    6
+# ZERO leads are both call-extension and gclid-bearing, so require_gclid below
+# splits the two sets cleanly and nothing can be counted twice.
+#
+# So: the call-extension calls come from Google Ads (which knows the campaign),
+# the website leads come from WhatConverts (which knows form vs phone), and the
+# two are added. Spend / clicks / impressions always come from Google Ads.
+#
+# July 2026 reconciles exactly, and independently in both directions:
+#   SEARCH | DEMOLITION            3 call-extension + 2 gclid WC = 5
+#   SEARCH | GPR & CONCRETE CUTTING 1 call-extension + 4 gclid WC = 5
+# and Google Ads recorded "WC All Leads (134236)" 2 / 4 for those same two
+# campaigns, which is the WhatConverts half arriving back from the upload.
+#
+# ** "Calls from ads" IS DELIBERATELY NOT BUCKETED. ** It is the native AD_CALL
+# twin of the call-extension action and double-counts it: July 2026 it fired
+# once on each campaign against 3 and 1 real call-extension calls. It was set
+# secondary in the 2026-07-31 conversion cleanup and is excluded here for the
+# same reason it is excluded on Ford Piano.
+#
+# ** THE ACTION NAMES CHANGE ON 2026-08-01 AND BOTH ARE BUCKETED. ** The
+# WhatConverts re-setup created duplicate actions, and the account cut over
+# cleanly: "Google Ads Call Extension (WC Setup)" (6883278370) carries every
+# call through 2026-07-31 and records nothing after it; "WC Call Extension -
+# New" (7702109939) records nothing before 2026-08-01 and carries every call
+# from it. Verified day by day across the boundary - they never both fire.
+# They are one surface across a rename, so bucketing both is not a double count.
+# If the old action ever fires again, this assumption has broken.
+conversion_action_buckets:
+  # No form action fires on this account. "Youform_submit" (WEBPAGE) is
+  # secondary and duplicates what WhatConverts already captures; forms come
+  # from WhatConverts below.
+  form: []
+  # Ad-call-asset calls only, across the 2026-08-01 rename. "WC All Leads
+  # (134236)" and its "- New" twin are deliberately absent: they are the same
+  # set of website leads WhatConverts supplies below, so bucketing them too
+  # would double every one.
+  phone:
+    - Google Ads Call Extension (WC Setup)
+    - WC Call Extension - New
+
+wc_lead_source:
+  creds: ~/shapeshift-reports/.secrets/whatconverts.env
+  profile_id: 134236            # "South Coast Demo" under Shapeshift account 87660
+  lead_source: google           # this is a Google Ads report
+  # The load-bearing filter on this account. It is what separates the website
+  # half from the ad-call half, not just a robocall guard: every call-extension
+  # call is gclid-less and is counted once, from Google Ads, in the phone
+  # bucket above. See the measured split in the block above.
+  require_gclid: true
+  lead_mediums: ["cpc", "ppc", "paid"]
+  # Repeat callers are not new leads, and WhatConverts uploads only uniques to
+  # Google Ads, so this is also what makes the two systems reconcile. It is
+  # doing real work here: July 2026 had 16 paid leads but only 10 unique.
+  unique_only: true
+  mode: add                     # ADD to the ad-call count above, do not replace it
+  # Campaign-keyed, so each block gets its own real lead count.
+  # ** The two campaigns are matched by DIFFERENT MECHANISMS, on purpose. **
+  # Demolition carries a tracking template, so its leads arrive with a real
+  # utm_campaign ("ss search demolition", and "ss+search+demolition" when the
+  # plus signs survive). GPR & Concrete Cutting has no tracking template, so
+  # its leads arrive with lead_campaign empty and are matched on the
+  # gad_campaignid Google appends to the landing URL instead - which is why its
+  # utm list below is empty and not a mistake.
+  campaign_sections:
+    "SEARCH | DEMOLITION": ["ss search demolition", "ss+search+demolition"]
+    "SEARCH | GPR & CONCRETE CUTTING": []
+  # Unmapped leads are FATAL by design, the lead-side twin of the QA unmapped
+  # spend row. Nothing is expected to be unmapped here: every gclid-bearing
+  # paid lead Jan-Aug 2026 resolves to one of the two campaigns.
+  #
+  # ** OUR OWN TEST LEAD 250044959 is in this profile permanently ** (2026-07-31
+  # attribution end-to-end test; WhatConverts has no delete endpoint). It is a
+  # Web Form carrying the fake gclid "CLAUDETEST0731B" and utm_campaign
+  # "ss+search+demolition", so require_gclid does NOT keep it out - unique_only
+  # does, because WhatConverts booked it Repeat. That is a thinner guard than it
+  # looks. If it ever surfaces in a lead count, flag it spam in the WhatConverts
+  # UI; the engine skips spam-flagged leads. It is already excluded from the
+  # client's own lead feed via exclude_lead_ids in
+  # lead_sheet_sync/config_south_coast_demo.yaml.
+
+# Sections are keyed on CAMPAIGN, not channel. A channel-level "Google Ads
+# Search" row would average demolition against concrete scanning, two services
+# with different customers, different CPCs and different landing pages.
+#
+# IDs, not names, so a campaign rename can never silently zero a row. Every id
+# is validated against the live account at run time; a typo'd or deleted id
+# fails the run loudly instead of writing zeros. The tradeoff is that a NEW
+# campaign is not picked up automatically, which is what the QA unmapped-spend
+# row exists to catch.
+#
+# EVERYTHING BETWEEN THE MARKERS BELOW IS GENERATED from campaigns.yaml by
+# build_campaign_tab.py, which also lays out the sheet, so the two can never
+# drift apart. Do not hand-edit it.
+# >>> BEGIN GENERATED SECTIONS (build_campaign_tab.py) - do not hand-edit
+# Derived from campaigns.yaml. Anchors match col A of the tab exactly.
+sections:
+  - anchor: "SEARCH | DEMOLITION"
+    campaign_ids: ["21688750218"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  - anchor: "SEARCH | GPR & CONCRETE CUTTING"
+    campaign_ids: ["23960461839"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  # QA block. `__all_campaigns__` is total cost across EVERY campaign in
+  # the account on any channel, mapped here or not. The sheet subtracts
+  # the sum of the campaign blocks from it; that row must read $0.00.
+  - anchor: "QA | UNMAPPED SPEND CHECK"
+    data_from: "__all_campaigns__"
+    inputs:
+      1: cost
+# <<< END GENERATED SECTIONS
+
+# The TOTAL PAID MEDIA block is entirely sheet formulas summing the campaign
+# blocks, so it is deliberately absent above. Every derived number (CTR, CPC,
+# Total Leads, Conv Rate, CPL) is likewise a formula: the engine writes only
+# raw rows, so a derived cell can never disagree with its own inputs.
+
+# Verified against the Google Ads API and the WhatConverts API 2026-08-05, for
+# July 2026, lead by lead. Leads: Demolition 3 call-extension (Google Ads) + 2
+# unique gclid WhatConverts; GPR 1 + 4.
+validation:
+  "2026-07":
+    "SEARCH | DEMOLITION":
+      clicks: 42
+      impressions: 517
+      cost: 604.64
+      form_leads: 0
+      phone_leads: 5
+    "SEARCH | GPR & CONCRETE CUTTING":
+      clicks: 38
+      impressions: 982
+      cost: 479.92
+      form_leads: 0
+      phone_leads: 5
+
+currency_offsets: [4]
+lsa_currency_offsets: [2]
+
+# No hand-entered cells anywhere in the tab, so the monthly close-out may
+# force-overwrite. Without this, activity landing after the last MTD refresh
+# freezes as a stale value the protected close-out would skip forever.
+fully_automated: true

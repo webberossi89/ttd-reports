@@ -24,6 +24,58 @@ Live clients:
 - **h-and-h** (sheet `1YQfyEiv26NVV_sdyYJbq8H3pcr9WYkSW_E53FIcj-uI`, tab
   `2026 Report`, in "H & H Signature Renovations Lead Sheet"). Onboarded
   2026-08-05, backfilled from 2026-05 (campaign launched 5/01).
+- **plitnick** (sheet `19xwER2sOuBFrZLbzhg5YTkyoHuihNhmnpbSlmzgTUg8`, tab
+  `2026 Report`, in "Plitnick Lead Sheet"). Four campaign blocks.
+- **365-pools** (sheet `1AZT3FdCG595Rl-eYXLkKXXfOqrWEpLe9jtsplfSrr0Y`, tab
+  `2026 Report`, in "365 Pool Service Lead Sheet", alongside the `Sheet1` lead
+  sync). Onboarded 2026-08-05, backfilled Jan-Jul. Two blocks, Search and PMax.
+  Same two-source `mode: add` shape as Ford Piano: `require_gclid` is the exact
+  separator on this account because not one of the 45 July ad-call-asset calls
+  carries a gclid, and every website lead does.
+- **plitnick** (sheet `19xwER2sOuBFrZLbzhg5YTkyoHuihNhmnpbSlmzgTUg8`, tab
+  `2026 Report`, in "Plitnick Lead Sheet"). Four campaigns.
+- **demolition-experts-ny** (sheet `1o6NYcVJg7tM_oH3WnNDfcoc10E4d2gQK7tOh61Tmid4`,
+  tab `2026 Report`, in "Demolition Experts Lead Sheet" — the same workbook the
+  client's own lead feed writes into on tab `Leads`). Onboarded 2026-08-06,
+  backfilled Jan-Aug. **Four blocks**: two Search, one PMax, one LSA. The LSA
+  campaign is a block rather than an LSA section because it genuinely spent
+  ($187.80, February only); leaving it out surfaced that in the QA row.
+  **Its `require_gclid` means something different from every other client here** —
+  this account has no "Google Ads Call Extension" number in WhatConverts, so
+  gclid separates "landed on the site" from "called from the ad", not form from
+  call. Read the config header before touching it. Replaces the old
+  channel-block `ads_report.yaml`, now retired.
+- **mr-cheapee** (sheet `1Xu3ec74sKxqCBlPsb98rx88PYFADPBmCWKrwG5MJ33Y`, tab
+  `2026 Report`, in "Mr Cheapee Inc Lead Sheet" — the same workbook the client's
+  own lead feed writes into on tabs `April` / `Web Form Leads`). Onboarded
+  2026-08-06, backfilled Jan-Aug. **Three blocks**: two Search, one LSA. LSA is a
+  major spender here ($7,254.58 in 2026), not a footnote. Same two-source
+  `mode: add` shape, and on this account the ad-call-asset number DOES have its
+  own WhatConverts `phone_name` ("Google Call Asset"), so `require_gclid` splits
+  the sources cleanly. **Gotcha:** the phone bucket needs the FULL action name
+  `Google Ads Call Extension (WC Setup)` — matching is exact set membership, and
+  the bare "Google Ads Call Extension" used on DENY silently yields ads=0.
+  Replaces the old channel-block `ads_report.yaml`, now retired — Mr Cheapee was
+  the LAST client on that engine, so `ads_report/run-all.sh` now globs zero
+  configs and the `shapeshift-ads-report-weekly` task should be disabled.
+- **mci-waste** (sheet `1N9oB7RrceWlGfm2qtq_0wa1xSecXu5pZk40b-Il9CR4`, tab
+  `2026 Report`, in "MCI Waste Lead Sheet" — the same workbook the client's own
+  lead feed writes into on tab `All Leads`). Onboarded 2026-08-06, backfilled
+  Jun-Aug; both campaigns launched 6/24 so there is nothing before June. Two
+  Search blocks, the second running AI Max keyword expansion. Same two-source
+  `mode: add` shape as Ford Piano and 365 Pools, and `require_gclid` is again
+  the exact separator: all 28 "Google Call Asset" calls Jan-Aug carry no gclid,
+  every website lead does.
+  **It is the only client on `conversion_metric: all_conversions`** — its
+  bucketed action was deliberately made secondary on 2026-08-06, so
+  `conversions` reads 0 for it. Read the config header before touching it.
+  **It is also the only client NOT on service-account auth**, because the
+  workbook is not shared with `ga4-reader@ttd-analytics-500221`.
+- **south-coast-demo** (sheet `1HCf0YVZQis-bxT6HM77lHr5SZU6qpaObPmuL_oz30Y8`,
+  tab `2026 Report`, in "South Coast Demo Lead Sheet" — the same workbook the
+  client's own lead feed writes into on tab `Sheet1`). Onboarded 2026-08-05,
+  backfilled from 2026-01 for Demolition; GPR & Concrete Cutting is blank
+  before July because it launched 7/02.
 
 ## Running it
 
@@ -77,6 +129,17 @@ pipes for the title deriver to split on.
    **Leave pre-launch months blank, never zeroed** — `$0.00` across a live
    looking row reads as "we ran and spent nothing", which is a different and
    untrue claim.
+
+   **On a client whose campaigns launched at different times, one backfill
+   cannot do this for you.** `write_sheet.py` takes one month list for the
+   whole config, and a campaign with no data in a requested month gets a real
+   `0` written, not a skip. So backfill the full range, then `values.batchClear`
+   the younger campaign's pre-launch INPUT cells. Clear only the input rows;
+   the rate rows between them are formulas and clearing those destroys the
+   block. On south-coast-demo that was rows 17/18/20/22/23 (Clicks,
+   Impressions, Cost, Form Leads, Phone Leads) across cols B:G for Jan-Jun.
+   The formulas already guard blanks — `IF(B18=0,"",…)` and `N()` on CPL — so
+   the whole block renders empty once the inputs are gone.
 6. Hand-reconcile one closed month and put it in `validation:`. The engine
    refuses to write if it stops matching, which is the point.
 
@@ -160,3 +223,32 @@ Audit any client before onboarding it. Tells: fake gclid, an
 Known and accepted: WhatConverts buckets by lead date, Google Ads by click date,
 so a lead either side of a month boundary can land in different months in the
 two systems.
+
+### Multi-block clients show $0.00 in pre-launch months, single-block ones show blank
+
+Found 2026-08-06 onboarding mci-waste. Not a config error, and not something a
+client config can fix.
+
+The TOTAL PAID MEDIA rows are generated as a sum of the campaign blocks:
+
+- **One block** → `=B5`. A plain reference to an empty cell returns empty, so a
+  pre-launch month renders **blank**. H&H (launched 2026-05) shows blank
+  Jan-Apr.
+- **Two or more blocks** → `=B5+B17`. Arithmetic coerces empty to 0, so the same
+  pre-launch month renders **`0` / `$0.00`**. mci-waste (launched 2026-06-24)
+  shows `$0.00` Jan-May in TOTAL PAID MEDIA and in `Sum Of Campaign Blocks`.
+
+Only the `Total Leads` row is guarded (`=IF(AND(B34="",B35=""),"",B34+B35)`),
+which is the blank-not-zero fix applied to the Duo tabs on 2026-08-05. Clicks,
+Impressions, Cost, Form Leads and Phone Leads are not.
+
+That is the same "we ran and spent nothing" misread the onboarding steps warn
+about, just one level up from the campaign blocks. **Fix is to wrap the other
+TOTAL rows in the same guard** in `build_campaign_tab.py`. Left undone
+deliberately: it changes generated formulas for every Duo and Shapeshift client
+at once, so it wants its own change window and a before/after cell diff, not a
+drive-by at the end of an unrelated session.
+
+Do **not** patch it by clearing the cells by hand — they are formulas, and the
+next `build` regenerates them, which is exactly the drift `campaigns.yaml`
+exists to prevent.

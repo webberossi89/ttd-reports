@@ -1,0 +1,36 @@
+# Source of truth for which campaigns get their own block in the 2026 Report
+# tab, and in what order. Blocks are laid out in this order, top to bottom.
+#
+# DO NOT hand-edit the layout anywhere else. build_campaign_tab.py reads this
+# file and derives BOTH the sheet layout AND the `sections:` block in
+# config.yaml from it, so the two can never drift apart.
+#
+#   cd ~/mcp/servers/google-ads
+#   uv run python3 ~/duo-reports/lead_tracker/build_campaign_tab.py \
+#     --clients-root ~/shapeshift-reports/report_clients \
+#     --client mr-cheapee build --apply
+
+report_title: "Mr Cheapee Inc | Paid Media Report"
+
+# 2026 spend through 2026-08-06 (verified from the Google Ads API):
+#   23286172312  Search - Dumpster Rentals - SS 11.25.25   $14,039.82   Jan-Aug
+#   23479320897  LSA (system-generated)                     $7,254.58   Jan-Aug
+#   23925878389  Search - AI Max - Dumpsters - SS 6.8.26    $2,735.82   Jun-Aug
+#
+# Exactly three campaigns have spent a cent in 2026; every other campaign in
+# the account is $0.00 and correctly absent. The QA row catches any that start.
+#
+# ORDERING NOTE — deliberate deviation from the sibling configs' "order by
+# 2026 spend" convention. Strict spend order would put LSA between the two
+# Search campaigns. More importantly the YTD figures invert the current
+# picture: the main Search campaign was throttled to a $1.00/day budget around
+# 2026-07-03 and took just $173.44 in July, while AI Max (launched 6/08) took
+# $1,397.04 and now carries ~88% of search spend. So the two Search blocks are
+# grouped, biggest-lifetime first, with LSA last.
+campaigns:
+  - id: "23286172312"
+    title: "SEARCH | DUMPSTER RENTALS"
+  - id: "23925878389"
+    title: "SEARCH | AI MAX"
+  - id: "23479320897"
+    title: "LSA | LOCAL SERVICES"

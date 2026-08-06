@@ -1,0 +1,189 @@
+client: 365-pools
+display_name: 365 Pool Service
+
+# Shapeshift Marketing client. CID 9058146127 sits under SSM MCC 519-986-4700,
+# reached through the TTD MCC (login_customer_id lives inside ttd.yaml).
+#
+# ** THERE ARE TWO SIMILARLY NAMED ACCOUNTS. ** "365 Pools" CID 3814941442 is
+# fully PAUSED legacy and must never be reported on. The live account is
+# "365 Pool Service" 9058146127, the one below.
+ads_creds: ~/mcp/secrets/google-ads/ttd.yaml
+search_pmax_video_account: "9058146127"
+
+# The account carries a system-generated Local Services Ads campaign that is
+# ENABLED but has never served: $0.00 spend and zero impressions in every month
+# of 2026 (verified 2026-08-05). Pointing lsa_account at the same CID lets the
+# engine call fetch_lsa unconditionally; it finds nothing worth reporting, and
+# with no LSA section listed below no LSA rows are ever written.
+lsa_account: "9058146127"
+
+# Same durable-auth rule as Ford Piano and Plitnick: the workbook is shared with
+# the service account, not with a personal identity, so losing one Google login
+# cannot break a client report. This SA already writes Sheet1 of this same
+# workbook for the 15-minute lead-sheet sync, so access is proven.
+sheets_creds: ~/.secrets/ga4/ttd-analytics-ga4-reader.json
+spreadsheet_id: "1AZT3FdCG595Rl-eYXLkKXXfOqrWEpLe9jtsplfSrr0Y"
+tab_name: "2026 Report"   # gid 1135165727, in "365 Pool Service Lead Sheet"
+
+# --------------------------------------------------------------------------
+# WHERE THE LEAD NUMBERS COME FROM, and why not from Google Ads conversions.
+# --------------------------------------------------------------------------
+# Same two-source shape as Ford Piano, for the same reason: neither source sees
+# every lead on its own, and they never see the same one twice. Audited lead by
+# lead on 2026-08-05 across all 953 WhatConverts leads Jan-Aug 2026.
+#
+#   WEBSITE leads -> WhatConverts (profile 152166). Web forms plus calls to the
+#     dynamic number pool, which WhatConverts labels phone_name "All Traffic"
+#     (tracking numbers +1 321-449-2562 and +1 321-449-8395). Every one carries
+#     a gclid, and WhatConverts is the only source that can say which was a form
+#     and which was a call.
+#   AD-ASSET CALLS -> Google Ads, action "Google Ads Call Extension". These are
+#     calls placed straight from the ad's call asset. WhatConverts sees them too
+#     (phone_name "Google Ads Call Asset", the single static number
+#     +1 321-449-8127) but they never touch the site, so NOT ONE of them carries
+#     a gclid. July 2026: 45 such calls in WhatConverts, 0 with a gclid.
+#
+# That is what makes `require_gclid` the exact separator on this account: it
+# keeps every website lead and drops every ad-asset call, with no overlap in
+# either direction. Verified across Jan-Aug 2026 - of the 173 leads surviving
+# the filters, 143 are "All Traffic" and 30 are web forms, and zero are
+# "Google Ads Call Asset". So the two sources below are provably disjoint,
+# which is the premise `mode: add` rests on.
+#
+# Spend / clicks / impressions always come from Google Ads.
+#
+# ** "Calls from ads" IS NOT BUCKETED - IT DUPLICATES THE CALL EXTENSION **
+# Both actions watch the same call asset. Daily July 2026 data has them firing
+# on the same days against the same calls; the counts differ only because
+# "Calls from ads" (AD_CALL, MANY_PER_CLICK) counts repeat callers and calls
+# past its duration threshold, while "Google Ads Call Extension" (UPLOAD_CALLS,
+# ONE_PER_CLICK) is WhatConverts' unique-only upload. July: 23 against 35 on the
+# same set of calls. Bucketing both would count most ad calls twice, so exactly
+# one is bucketed. This is the Ford Piano finding, not the Plitnick one: on
+# Plitnick the two actions are genuinely different surfaces, here they are not.
+#
+# ** "WC Leads (152166)" IS NOT BUCKETED ** - it is the same set of website
+# leads WhatConverts supplies below, so bucketing it too would double every one.
+#
+# ** THE GA4 ACTIONS ARE ALL HIDDEN ** - "365 Pools (web) web_form_unique",
+# "phone_call_unique", "qualify_lead", "close_convert_lead" and "purchase" are
+# all status HIDDEN and record nothing. There is no form action to bucket.
+#
+# Known and accepted: WhatConverts buckets by lead date, Google Ads by click
+# date, so a lead either side of a month boundary can land in different months
+# in the two systems. July 2026: 24 filtered WhatConverts website leads against
+# 28 on "WC Leads (152166)" in Google Ads, all of the gap on PMax.
+conversion_action_buckets:
+  # No working form action exists on this account; forms come from WhatConverts.
+  form: []
+  # Ad-call-asset calls only. See the two exclusions explained above.
+  phone:
+    - Google Ads Call Extension
+
+wc_lead_source:
+  creds: ~/shapeshift-reports/.secrets/whatconverts.env
+  profile_id: 152166            # "365 Pools" under Shapeshift account 87660
+  lead_source: google           # this is a Google Ads report, not an all-channel one
+  require_gclid: true           # website leads only; drops every ad-asset call, see above
+  # Both filters, not either. A gclid outlives the click that set it, so a
+  # repeat visitor arriving later from the Google Business Profile still carries
+  # one; gclid alone would book that as a paid lead.
+  lead_mediums: ["cpc", "ppc", "paid"]
+  unique_only: true             # repeat callers are not new leads, and WC uploads only uniques
+  mode: add                     # ADD to the ad-call count above, do not replace it
+  # Campaign-keyed, not channel-keyed, so each block gets its own real lead
+  # count. Matched on utm_campaign OR on gad_campaignid in the landing URL.
+  # The account writes the Search campaign's utm two ways ("Search Pool Repair"
+  # and "Search+Pool+Repair"); normalize_campaign() collapses both, and the
+  # second spelling is listed anyway so the intent is on the record.
+  #
+  # The gad_campaignid fallback matters here: one January 2026 lead carries a
+  # null lead_campaign and would otherwise be unmapped, but its landing URL
+  # holds gad_campaignid=23055499140, which is the Search campaign.
+  #
+  # PMax leads carry gad_campaignids that are NOT the campaign's own id
+  # (23374104925, 23370130274, 23370129833 against campaign 23370119927) - that
+  # is normal for Performance Max, and the utm match is what places them.
+  campaign_sections:
+    "SEARCH | POOL REPAIR": ["Search Pool Repair", "Search+Pool+Repair"]
+    "PMAX | POOL SERVICE": ["Pmax", "PMax", "Performance Max"]
+  # Unmapped leads are FATAL by design. Verified 2026-08-05 that every filtered
+  # lead Jan-Aug 2026 maps to one of the two blocks, so this stays off.
+
+# Sections are keyed on CAMPAIGN, not channel. A channel-level "Google Ads
+# Search" row averages every campaign into a number that stops meaning anything
+# the moment an account runs more than one - and these two have very different
+# economics ($19.24 CPC on Search against $2.61 on PMax in July 2026).
+#
+# IDs, not names, so a campaign rename can never silently zero a row. Every id
+# is validated against the live account at run time; a typo'd or deleted id
+# fails the run loudly instead of writing zeros. The tradeoff is that a NEW
+# campaign is not picked up automatically, which is what the QA unmapped-spend
+# row exists to catch.
+#
+# EVERYTHING BETWEEN THE MARKERS BELOW IS GENERATED from campaigns.yaml by
+# build_campaign_tab.py, which also lays out the sheet, so the two can never
+# drift apart. Do not hand-edit it.
+# >>> BEGIN GENERATED SECTIONS (build_campaign_tab.py) - do not hand-edit
+# Derived from campaigns.yaml. Anchors match col A of the tab exactly.
+sections:
+  - anchor: "SEARCH | POOL REPAIR"
+    campaign_ids: ["23055499140"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  - anchor: "PMAX | POOL SERVICE"
+    campaign_ids: ["23370119927"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  # QA block. `__all_campaigns__` is total cost across EVERY campaign in
+  # the account on any channel, mapped here or not. The sheet subtracts
+  # the sum of the campaign blocks from it; that row must read $0.00.
+  - anchor: "QA | UNMAPPED SPEND CHECK"
+    data_from: "__all_campaigns__"
+    inputs:
+      1: cost
+# <<< END GENERATED SECTIONS
+
+# The TOTAL PAID MEDIA block is entirely sheet formulas summing the campaign
+# blocks, so it is deliberately absent. Every derived number (CTR, CPC, Total
+# Leads, Conv Rate, CPL) is likewise a formula: the engine writes only raw rows,
+# so a derived cell can never disagree with its own inputs.
+
+# Hand-reconciled against the Google Ads API and the WhatConverts API for
+# July 2026 on 2026-08-05.
+#   SEARCH  9 leads = 8 unique gclid WhatConverts website leads (1 form +
+#           7 phone) + 1 "Google Ads Call Extension" call.
+#   PMAX   50 leads = 16 unique gclid WhatConverts website leads (1 form +
+#           15 phone) + 34 "Google Ads Call Extension" calls.
+validation:
+  "2026-07":
+    "SEARCH | POOL REPAIR":
+      clicks: 44
+      impressions: 352
+      cost: 846.76
+      form_leads: 1
+      phone_leads: 8
+    "PMAX | POOL SERVICE":
+      clicks: 233
+      impressions: 3599
+      cost: 607.72
+      form_leads: 1
+      phone_leads: 49
+
+currency_offsets: [4]
+lsa_currency_offsets: [2]
+
+# No hand-entered cells anywhere in the tab, so the monthly close-out may
+# force-overwrite. Without this, activity landing after the last MTD refresh
+# freezes as a stale value the protected close-out would skip forever.
+fully_automated: true

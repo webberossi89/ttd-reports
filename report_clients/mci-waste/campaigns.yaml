@@ -1,0 +1,30 @@
+# Source of truth for which campaigns get their own block in the 2026 Report
+# tab, and in what order. Blocks are laid out in this order, top to bottom.
+#
+# DO NOT hand-edit the layout anywhere else. build_campaign_tab.py reads this
+# file and derives BOTH the sheet layout AND the `sections:` block in
+# config.yaml from it, so the two can never drift apart.
+#
+# To add a campaign (Shapeshift clients live outside the Duo clients root, so
+# --clients-root is required):
+#
+#   cd ~/mcp/servers/google-ads
+#   uv run python3 ~/duo-reports/lead_tracker/build_campaign_tab.py \
+#     --clients-root ~/shapeshift-reports/report_clients \
+#     --client mci-waste add <campaign_id> --title "SEARCH | ..." --apply
+
+report_title: "MCI Waste | Paid Media Report"
+
+# Account campaign names are "Search - Dumpster Rentals - SS 6.24.26" and
+# "Search - AI Max - Dumpsters - SS 6.24.26", which have no pipes for
+# derive_title() to split on, so titles are passed explicitly.
+#
+# Ordered by spend. Both launched 2026-06-24 and both are Search; the second
+# runs Google's AI Max keyword expansion, which is why its economics are wholly
+# different ($8.25 CPC against $17.89 in July 2026) and why it needs its own
+# block rather than being averaged into a single "Search" row.
+campaigns:
+  - id: "23969469266"
+    title: "SEARCH | DUMPSTER RENTALS"
+  - id: "23974073920"
+    title: "SEARCH | AI MAX - DUMPSTERS"

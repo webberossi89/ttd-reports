@@ -40,6 +40,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent / "lead_tracker"))
 
 from sync_leads import (  # noqa: E402
+    message_for,
     name_from_fields,
     phone_from_fields,
     sheets_service,
@@ -73,6 +74,13 @@ def main() -> int:
     except ValueError:
         print("Config has no 'Contact Name'/'Phone Number' column; nothing to repair.")
         return 0
+    # Message is optional and repaired on the same terms as the other two: only
+    # ever filled when the sheet cell is blank. Added 2026-08-05 for South Coast,
+    # whose retired Zapier pipe forwarded only email + phone, so months of
+    # web-form rows carry an address and a number and no idea what the person
+    # wanted. Recovering the text into WhatConverts does NOT reach the sheet on
+    # its own: sync_leads.py only ever prepends and never revisits a written row.
+    msg_i = columns.index("Message") if "Message" in columns else None
 
     token, secret = load_creds(cfg)
     end_d = date.today()
@@ -92,7 +100,7 @@ def main() -> int:
     ).execute().get("values", [])
     print(f"Sheet '{tab}': {len(rows)} data rows")
 
-    updates, skipped_no_lead, filled_name, filled_phone = [], 0, 0, 0
+    updates, skipped_no_lead, filled_name, filled_phone, filled_msg = [], 0, 0, 0, 0
     for offset, row in enumerate(rows):
         sheet_row = offset + 2
         lead_id = str(row[0]).strip() if row and len(row) > 0 else ""
@@ -100,7 +108,8 @@ def main() -> int:
             continue
         cur_name = row[name_i].strip() if len(row) > name_i else ""
         cur_phone = row[phone_i].strip() if len(row) > phone_i else ""
-        if cur_name and cur_phone:
+        cur_msg = (row[msg_i].strip() if msg_i is not None and len(row) > msg_i else "")
+        if cur_name and cur_phone and (msg_i is None or cur_msg):
             continue
         lead = by_id.get(lead_id)
         if lead is None:
@@ -116,9 +125,14 @@ def main() -> int:
             if v:
                 updates.append((f"'{tab}'!{col_letter(phone_i)}{sheet_row}", v, lead_id, "phone"))
                 filled_phone += 1
+        if msg_i is not None and not cur_msg:
+            v = message_for(lead)
+            if v:
+                updates.append((f"'{tab}'!{col_letter(msg_i)}{sheet_row}", v, lead_id, "msg"))
+                filled_msg += 1
 
-    print(f"\nWould fill {filled_name} Contact Name + {filled_phone} Phone Number cells "
-          f"({len(updates)} cells total)")
+    print(f"\nWould fill {filled_name} Contact Name + {filled_phone} Phone Number "
+          f"+ {filled_msg} Message cells ({len(updates)} cells total)")
     if skipped_no_lead:
         print(f"{skipped_no_lead} sheet rows had no matching lead in the WC window "
               f"(older than --lookback-days); re-run with a longer window to cover them.")

@@ -1,0 +1,32 @@
+# Source of truth for which campaigns get their own block in the 2026 Report
+# tab, and in what order. Blocks are laid out in this order, top to bottom.
+#
+# DO NOT hand-edit the layout anywhere else. build_campaign_tab.py reads this
+# file and derives BOTH the sheet layout AND the `sections:` block in
+# config.yaml from it, so the two can never drift apart.
+#
+# To add a campaign (Shapeshift clients live outside the Duo clients root, so
+# --clients-root is required):
+#
+#   cd ~/mcp/servers/google-ads
+#   uv run python3 ~/duo-reports/lead_tracker/build_campaign_tab.py \
+#     --clients-root ~/shapeshift-reports/report_clients \
+#     --client 365-pools add <campaign_id> --title "SEARCH | ..." --apply
+
+report_title: "365 Pool Service | Paid Media Report"
+
+# Account campaign names are "Search - Pool Repair - SS 9.20.25" and the
+# Google-generated "Performance Max-1", so derive_title() has nothing useful to
+# split on. Titles are passed explicitly instead.
+#
+# Ordered by spend: Search carries the larger budget and the higher CPC, and is
+# the campaign the monthly decisions are actually about. PMax sits underneath.
+#
+# NOT listed: the system-generated Local Services Ads campaign. It is ENABLED
+# but has never spent or served ($0.00, zero impressions, every month of 2026),
+# so it has no block. The QA unmapped-spend row catches it the moment it does.
+campaigns:
+  - id: "23055499140"
+    title: "SEARCH | POOL REPAIR"
+  - id: "23370119927"
+    title: "PMAX | POOL SERVICE"

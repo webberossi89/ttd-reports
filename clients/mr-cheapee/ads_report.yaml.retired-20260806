@@ -46,6 +46,16 @@ sections:
     row_labels:
       56: "Qualified Leads"
 
+# Peel Meta/Facebook out of the `ppc` bucket so they are not reported as
+# Google Ads Search leads. Added 2026-08-06 (audit item G3): July's ppc bucket
+# held 14 unique Meta leads (lead_source=facebook, lead_medium=cpc,
+# phone_name="Facebook Ads"), which understated Google paid-search CPL from
+# ~$30 to ~$24. The same pattern held in June (17), so it is systemic.
+# These leads land in a `ppc_social` bucket that no section writes, so they are
+# excluded from the report rather than misfiled. Reporting Meta properly is
+# blocked on B2 (nobody knows whose campaign it is or what it costs).
+social_source_match: [facebook, meta, instagram]
+
 # WhatConverts channel classification. Mirrors the lead_tracker config so the
 # ppc / lsa buckets line up exactly with the existing Mr Cheapee tracker.
 classification_rules:

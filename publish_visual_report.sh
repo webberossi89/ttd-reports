@@ -63,6 +63,28 @@ title = m.group(1).strip() if m else "Performance Report"
 if m:
     html = html[:m.start()] + html[m.end():]
 
+# FORCE LIGHT MODE. Client reports are print-like documents and are read on
+# whatever device the client happens to have; several arrive on phones set to
+# dark. The report CSS carries a dark palette inherited from the first report,
+# and a `color-scheme: light` declaration does NOT stop it, because
+# `@media (prefers-color-scheme: dark)` matches the OS setting regardless.
+# Worse, any per-client accent override written as a plain `:root {}` block
+# lands at the SAME specificity as the dark block's
+# `:root:where(:not([data-theme="light"]))` (`:where()` has zero specificity)
+# and, being later in the file, wins - so a light accent wash survives into
+# dark mode while `--ink` flips to near-white. That is unreadable, and it is
+# exactly what happened to the Mr Cheapee callouts on 2026-08-06.
+#
+# So neutralise both dark entry points at publish time rather than trusting
+# each report's CSS to behave:
+#   - the dark media query is rewritten to one that can never match
+#   - the explicit dark theme attribute selector is renamed to an inert one
+# Anything already light-only is unaffected; this is idempotent.
+html = re.sub(r"@media\s*\(\s*prefers-color-scheme\s*:\s*dark\s*\)",
+              "@media not all", html, flags=re.I)
+html = re.sub(r':root\[data-theme\s*=\s*"dark"\]',
+              ':root[data-theme="dark-disabled"]', html, flags=re.I)
+
 icon = ""
 if emoji:
     svg = ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>"
@@ -75,9 +97,11 @@ open(out, "w", encoding="utf-8").write(
     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
     "<meta name=\"robots\" content=\"noindex, nofollow, noarchive, nosnippet\">\n"
     "<meta name=\"googlebot\" content=\"noindex, nofollow\">\n"
+    "<meta name=\"color-scheme\" content=\"light\">\n"
     f"<title>{title}</title>\n"
     f"{icon}"
-    "<style>body{margin:0;padding:0}img{max-width:100%}</style>\n"
+    "<style>body{margin:0;padding:0}img{max-width:100%}\n"
+    ":root,html,body{color-scheme:light !important}</style>\n"
     "</head>\n<body>\n" + html.lstrip("\n") + "\n</body>\n</html>\n"
 )
 PY

@@ -120,6 +120,12 @@ def pull_wc_leadtype(cfg: dict, months: list[str]) -> dict[str, dict[str, dict[s
     )
     target = set(months)
     unique_only = cfg.get("unique_only", True)
+    # Optional: peel paid-social (Meta/Facebook) leads out of the generic ppc
+    # bucket by lead_source, so they are never counted as Google Ads Search
+    # leads. The WC `ppc` rule matches lead_medium=cpc, which Meta also uses,
+    # so without this a client running Meta has its Google CPL understated.
+    # Empty by default; only clients that set social_source_match are affected.
+    social_match = [s.lower() for s in (cfg.get("social_source_match") or [])]
     # Optional: peel PMax leads out of the generic ppc bucket by lead_campaign,
     # so a Performance Max report section can be filled separately from Search.
     pmax_match = [p.lower() for p in (cfg.get("pmax_campaign_match") or [])]
@@ -132,6 +138,10 @@ def pull_wc_leadtype(cfg: dict, months: list[str]) -> dict[str, dict[str, dict[s
             n_repeat += 1
             continue  # WhatConverts flagged this as a repeat lead
         ch = classify(L, rules)
+        if ch == "ppc" and social_match:
+            ls = str(L.get("lead_source") or "").lower()
+            if any(s in ls for s in social_match):
+                ch = "ppc_social"
         if ch == "ppc" and pmax_match:
             lc = str(L.get("lead_campaign") or "").lower()
             if any(p in lc for p in pmax_match):

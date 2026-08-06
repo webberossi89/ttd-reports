@@ -1,0 +1,193 @@
+client: demolition-experts-ny
+display_name: Demolition Experts NY
+
+# Shapeshift Marketing client. CID 6246278923 sits under SSM MCC, reached
+# through the TTD MCC (login_customer_id 5199864700 lives inside ttd.yaml).
+ads_creds: ~/mcp/secrets/google-ads/ttd.yaml
+search_pmax_video_account: "6246278923"
+
+# This account HAS a Local Services campaign that really spent: 23484509507,
+# $187.80, February 2026 only, then nothing. It is listed as its own block in
+# campaigns.yaml rather than handled through the LSA section, so its spend
+# reconciles in the QA row like any other campaign.
+lsa_account: "6246278923"
+
+# Durable auth: the workbook is shared with the service account, not a personal
+# identity. Verified 2026-08-06 that ga4-reader@ttd-analytics-500221 can read
+# "Demolition Experts Lead Sheet". This is the SAME workbook the client's lead
+# feed writes into on tab "Leads" (lead_sheet_sync/config_demolition_experts.yaml).
+sheets_creds: ~/.secrets/ga4/ttd-analytics-ga4-reader.json
+spreadsheet_id: "1o6NYcVJg7tM_oH3WnNDfcoc10E4d2gQK7tOh61Tmid4"
+tab_name: "2026 Report"
+
+# --------------------------------------------------------------------------
+# WHERE THE LEAD NUMBERS COME FROM. Measured on this account 2026-08-06 across
+# all 622 WhatConverts leads Jan 1 - Aug 6 2026 (215 paid, 158 paid Unique).
+# --------------------------------------------------------------------------
+# Same two-source `mode: add` shape as Ford Piano / 365-pools / South Coast, but
+# the SEPARATOR MEANS SOMETHING DIFFERENT HERE, so read this before changing it.
+#
+# On those accounts, ad-call-asset calls arrive in WhatConverts under a distinct
+# phone_name ("Google Ads Call Extension" / "Google Ads Call Asset"). ** THAT
+# NUMBER DOES NOT EXIST ON THIS ACCOUNT. ** Every paid call, ad-asset or not,
+# arrives through the single dynamic pool WhatConverts labels "All Traffic":
+#
+#     phone_name "All Traffic"  gclid=False  Phone Call  132
+#     phone_name "All Traffic"  gclid=True   Phone Call   63
+#     (web form)                gclid=True   Web Form     18
+#     (web form)                gclid=False  Web Form      1
+#     "GBP - Direct Call"       gclid=True   Phone Call    1
+#
+# So gclid here separates "landed on the site" from "called straight from the
+# ad", NOT "form" from "call". require_gclid: true is still exactly right, but
+# for a different reason: it keeps the leads Google Ads uploaded back as CLICK
+# conversions and drops the ones it uploaded as CALL conversions, which the
+# phone bucket below then supplies WITH campaign attribution.
+#
+# The two sources reconcile month by month, which is what proves they are
+# disjoint (WC paid-Unique split by gclid, vs the two Google Ads upload actions):
+#
+#     month     WC w/gclid   "WC Leads (155565)"   WC no-gclid   "Call Extension"
+#     2026-04       18              18                  11              8
+#     2026-05       14              15                  15             16
+#     2026-06       12              10                  25             25
+#     2026-07        4               6                  21             20
+#
+# The +/-2 drift is conversion-date vs lead-date lag, not double counting.
+#
+# ** "Calls from ads" IS DELIBERATELY NOT BUCKETED. ** It is the native AD_CALL
+# twin of the call-extension upload and records the same calls: 56 all_conversions
+# Jun 8 - Aug 6 against the upload's 45, on the same campaigns. It is already
+# excluded from the Conversions column on the account (include_in_conversions_metric
+# false). Bucketing it would double every ad call.
+#
+# ** "WC Leads (155565)" IS NOT BUCKETED ** - it is the same set of gclid-bearing
+# website leads WhatConverts supplies below, so bucketing it too would double them.
+conversion_action_buckets:
+  # No usable form action. "Local actions - Website visits" is a PAGE_VIEW that
+  # records 3 all_conversions and 0 in the Conversions column; the GA4 twins
+  # ("...web_form_unique", "...phone_call_unique") are status HIDDEN and record
+  # nothing. Forms come from WhatConverts below.
+  form: []
+  # Ad-call-asset calls only. Google Ads knows their campaign; WhatConverts
+  # cannot, because they never touch the site and carry no gclid.
+  phone:
+    - Google Ads Call Extension
+
+wc_lead_source:
+  creds: ~/shapeshift-reports/.secrets/whatconverts.env
+  profile_id: 155565
+  lead_source: google
+  # Load-bearing: the exact separator between the two sources. See the block above.
+  require_gclid: true
+  lead_mediums: ["cpc", "ppc", "paid"]
+  # WhatConverts uploads only uniques to Google Ads, so this is also what makes
+  # the two systems reconcile. Real work here: 215 paid leads, 158 paid Unique.
+  # It is the same Unique-only rule the lead_tracker and the older channel-block
+  # report already use on this client.
+  unique_only: true
+  mode: add
+  # Campaign-keyed. Matching is exact set membership on a NORMALIZED utm
+  # (normalize_campaign lowercases and turns + _ - into spaces), so "demo" can
+  # never bleed into "demo ai max". "Demo+AI+Max" and "Demo AI Max" both
+  # normalize to "demo ai max" and are one key.
+  campaign_sections:
+    "SEARCH | DEMOLITION": ["Demo"]
+    "SEARCH | DEMOLITION AI MAX": ["Demo+AI+Max", "Demo AI Max", "Demo Broadmatch"]
+    "PMAX | PERFORMANCE MAX": ["Pmax"]
+    "LSA | LOCAL SERVICES": ["LSA"]
+  # ** WHY THIS IS true HERE, WHEN IT IS false EVERYWHERE ELSE. **
+  # Three gclid-bearing leads in 2026 carry an EMPTY utm_campaign and are matched
+  # only by the gad_campaignid on their landing URL. Two of those point at
+  # 23374468555 and 23365357839 - campaign IDs that DO NOT EXIST in this account
+  # (verified 2026-08-06; they resolve to nothing). They cannot be added to any
+  # block's campaign_ids because build/write validate every id against the live
+  # account and fail loudly on an unknown one. So those 2 leads, out of 158 paid
+  # Unique across 8 months, are dropped with a warning rather than failing the run.
+  # The 6 PMax leads carrying the same stale ids are unaffected: they have
+  # utm "Pmax" and match on that.
+  # ** If this warning ever counts more than a handful, investigate rather than
+  # raising the tolerance - it means real leads stopped carrying a utm. **
+  allow_unmapped: true
+
+# No hand-entered cells anywhere on this tab (the old channel-block report's
+# manual "Qualified Leads" row does not exist in this layout), so the monthly
+# close-out force-overwrites rather than preserving typed values.
+fully_automated: true
+
+# Hand-reconciled closed month. The engine refuses to write if it stops
+# matching, which is the point. Verified 2026-08-06 straight from the Google Ads
+# API per campaign (clicks/impressions/cost) and from the lead maths above:
+# July WhatConverts paid-Unique was 25 (1 form + 24 phone) against the 24 booked
+# here, the same +/-1 attribution-lag drift documented in the reconciliation table.
+validation:
+  "2026-07":
+    "SEARCH | DEMOLITION":
+      clicks: 12
+      impressions: 102
+      cost: 301.05
+      form_leads: 0
+      phone_leads: 5
+    "SEARCH | DEMOLITION AI MAX":
+      clicks: 105
+      impressions: 2671
+      cost: 1114.68
+      form_leads: 1
+      phone_leads: 18
+    "PMAX | PERFORMANCE MAX":
+      clicks: 16
+      impressions: 640
+      cost: 60.35
+      form_leads: 0
+      phone_leads: 0
+
+# EVERYTHING BETWEEN THE MARKERS BELOW IS GENERATED from campaigns.yaml by
+# build_campaign_tab.py, which also lays out the sheet, so the two can never
+# drift apart. Do not hand-edit it.
+# >>> BEGIN GENERATED SECTIONS (build_campaign_tab.py) - do not hand-edit
+# Derived from campaigns.yaml. Anchors match col A of the tab exactly.
+sections:
+  - anchor: "SEARCH | DEMOLITION"
+    campaign_ids: ["23342935085"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  - anchor: "SEARCH | DEMOLITION AI MAX"
+    campaign_ids: ["23254223274"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  - anchor: "PMAX | PERFORMANCE MAX"
+    campaign_ids: ["23365315830"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  - anchor: "LSA | LOCAL SERVICES"
+    campaign_ids: ["23484509507"]
+    inputs:
+      1: clicks
+      2: impressions
+      4: cost
+      6: form_leads
+      7: phone_leads
+
+  # QA block. `__all_campaigns__` is total cost across EVERY campaign in
+  # the account on any channel, mapped here or not. The sheet subtracts
+  # the sum of the campaign blocks from it; that row must read $0.00.
+  - anchor: "QA | UNMAPPED SPEND CHECK"
+    data_from: "__all_campaigns__"
+    inputs:
+      1: cost
+# <<< END GENERATED SECTIONS

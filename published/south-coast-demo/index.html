@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<title>South Coast Demolition &mdash; July 2026 Performance Report</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%9A%A7%3C/text%3E%3C/svg%3E">
+<style>body{margin:0;padding:0}img{max-width:100%}
+:root,html,body{color-scheme:light !important}</style>
+</head>
+<body>
+<style>
+  :root {
+    color-scheme: light;
+    --ground:      #F1EFEA;
+    --surface:     #FBFAF8;
+    --surface-2:   #FFFFFF;
+    --ink:         #1A1714;
+    --ink-2:       #57514A;
+    --ink-3:       #867F74;
+    --rule:        #DDD8CE;
+    --rule-soft:   #E9E5DC;
+    --accent:      #8A6410;
+    --accent-mark: #B07C10;
+    --accent-wash: #F3E9CE;
+
+    --s1: #B07C10;  /* brass  */
+    --s2: #0E8A66;  /* jade   */
+    --s3: #2F5FA8;  /* blue   */
+    --s4: #A32C46;  /* claret */
+
+    --good:      #2F7A55;
+    --good-bg:   #E4F0E8;
+    --attn:      #A85A12;
+    --attn-bg:   #F8E9DA;
+    --neutral-bg:#EAE6DD;
+
+    --display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+
+    --measure: 68ch;
+    --pad: clamp(1.1rem, 3vw, 2rem);
+  }
+
+  @media not all {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --ground:      #131211;
+      --surface:     #1C1A17;
+      --surface-2:   #222019;
+      --ink:         #EFEBE3;
+      --ink-2:       #B3ABA0;
+      --ink-3:       #837C72;
+      --rule:        #2E2A24;
+      --rule-soft:   #262218;
+      --accent:      #D3A544;
+      --accent-mark: #D3A544;
+      --accent-wash: #332B18;
+      --s1: #B98C24;
+      --s2: #1F9E76;
+      --s3: #4E86D8;
+      --s4: #C74E6A;
+      --good:      #5FBE8A;
+      --good-bg:   #1B2C22;
+      --attn:      #DE9A55;
+      --attn-bg:   #33251A;
+      --neutral-bg:#282419;
+    }
+  }
+
+  :root[data-theme="dark-disabled"] {
+    color-scheme: dark;
+    --ground:      #131211;
+    --surface:     #1C1A17;
+    --surface-2:   #222019;
+    --ink:         #EFEBE3;
+    --ink-2:       #B3ABA0;
+    --ink-3:       #837C72;
+    --rule:        #2E2A24;
+    --rule-soft:   #262218;
+    --accent:      #D3A544;
+    --accent-mark: #D3A544;
+    --accent-wash: #332B18;
+    --s1: #B98C24;
+    --s2: #1F9E76;
+    --s3: #4E86D8;
+    --s4: #C74E6A;
+    --good:      #5FBE8A;
+    --good-bg:   #1B2C22;
+    --attn:      #DE9A55;
+    --attn-bg:   #33251A;
+    --neutral-bg:#282419;
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --ground:      #F1EFEA;
+    --surface:     #FBFAF8;
+    --surface-2:   #FFFFFF;
+    --ink:         #1A1714;
+    --ink-2:       #57514A;
+    --ink-3:       #867F74;
+    --rule:        #DDD8CE;
+    --rule-soft:   #E9E5DC;
+    --accent:      #8A6410;
+    --accent-mark: #B07C10;
+    --accent-wash: #F3E9CE;
+    --s1: #B07C10;
+    --s2: #0E8A66;
+    --s3: #2F5FA8;
+    --s4: #A32C46;
+    --good:      #2F7A55;
+    --good-bg:   #E4F0E8;
+    --attn:      #A85A12;
+    --attn-bg:   #F8E9DA;
+    --neutral-bg:#EAE6DD;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(1rem, 4vw, 3.5rem) clamp(0.9rem, 3vw, 2rem) 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.4rem, 3vw, 2.4rem);
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    border-top: 3px solid var(--accent-mark);
+    padding-top: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .masthead h1 {
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 6.4vw, 3.7rem);
+    line-height: 1.02;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0.35rem 0 0;
+    text-wrap: balance;
+  }
+  .masthead .sub {
+    font-family: var(--display);
+    font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+    font-style: italic;
+    color: var(--ink-2);
+    margin: 0.4rem 0 0;
+  }
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem 1.6rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 1rem 0;
+  }
+  .meta div { display: flex; flex-direction: column; gap: 0.15rem; }
+  .meta .k {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .meta .v { font-size: 0.94rem; color: var(--ink); }
+
+  /* ---------- sections ---------- */
+  section {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: var(--pad);
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+  }
+  .sec-head { display: flex; flex-direction: column; gap: 0.3rem; }
+  .sec-head h2 {
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 3.4vw, 2.05rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .sec-head .lede {
+    max-width: var(--measure);
+    color: var(--ink-2);
+    margin: 0.2rem 0 0;
+  }
+  h3 {
+    font-family: var(--body);
+    font-size: 0.78rem;
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    margin: 0 0 0.7rem;
+  }
+  p { max-width: var(--measure); margin: 0 0 0.85rem; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 650; color: var(--ink); }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent-mark);
+    outline-offset: 2px;
+  }
+
+  /* ---------- stat tiles ---------- */
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .tile {
+    background: var(--surface-2);
+    padding: 0.95rem 0.8rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .tile .k {
+    font-family: var(--mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  /* Sized so the longest figure this report carries, $1,084.56, still fits a
+     tile when seven of them share a row at the 1120px page width. */
+  .tile .v {
+    font-family: var(--display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+  }
+  .tile .n { font-size: 0.78rem; color: var(--ink-3); line-height: 1.4; }
+  .tile.lead .v { color: var(--accent); }
+
+  /* ---------- callouts ---------- */
+  .note {
+    border-left: 3px solid var(--accent-mark);
+    background: var(--accent-wash);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 3px 3px 0;
+  }
+  .note.plain { background: var(--neutral-bg); border-left-color: var(--ink-3); }
+  .note .t {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+  .note p { font-size: 0.93rem; }
+
+  /* ---------- tables ---------- */
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 0.9rem; }
+  caption {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding-bottom: 0.55rem;
+  }
+  th, td { padding: 0.6rem 0.7rem; text-align: left; border-bottom: 1px solid var(--rule-soft); }
+  thead th {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+    border-bottom: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); font-size: 0.85rem; }
+  tbody tr:last-child td { border-bottom: none; }
+  tr.total td { border-top: 1px solid var(--rule); font-weight: 650; border-bottom: none; background: var(--surface-2); }
+  .swatch {
+    display: inline-block; width: 9px; height: 9px; border-radius: 2px;
+    margin-right: 0.5rem; vertical-align: baseline;
+  }
+  td .sm { display: block; font-size: 0.78rem; color: var(--ink-3); font-family: var(--body); }
+
+  /* ---------- charts ---------- */
+  figure { margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+  figcaption { font-size: 0.82rem; color: var(--ink-3); max-width: var(--measure); }
+  .chart-wrap { position: relative; overflow-x: auto; }
+  svg { display: block; width: 100%; height: auto; }
+  .grid-line { stroke: var(--rule); stroke-width: 1; }
+  .axis-txt { fill: var(--ink-3); font-family: var(--mono); font-size: 9.5px; }
+  .axis-txt.b { fill: var(--ink-2); }
+  .legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; font-size: 0.8rem; color: var(--ink-2); }
+  .legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+
+  .tip {
+    position: absolute; pointer-events: none; opacity: 0;
+    transform: translate(-50%, -115%);
+    background: var(--ink); color: var(--ground);
+    font-family: var(--mono); font-size: 0.72rem; line-height: 1.5;
+    padding: 0.4rem 0.55rem; border-radius: 3px; white-space: nowrap;
+    transition: opacity 0.1s ease; z-index: 5;
+  }
+  .tip.on { opacity: 1; }
+  .hit { fill: transparent; cursor: crosshair; }
+
+  /* ---------- work lists ---------- */
+  .pill {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.18rem 0.45rem; border-radius: 2px;
+    white-space: nowrap;
+  }
+  .pill.done { background: var(--good-bg); color: var(--good); }
+  .pill.next { background: var(--accent-wash); color: var(--accent); }
+  .pill.you  { background: var(--attn-bg); color: var(--attn); }
+
+  .items { list-style: none; display: flex; flex-direction: column; gap: 0; padding: 0; margin: 0; }
+  .items li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.3rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .items li:last-child { border-bottom: none; }
+  .items .hd { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+  .items .ttl { font-weight: 620; }
+  .items .dt { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-3); }
+  .items .bd { color: var(--ink-2); font-size: 0.93rem; max-width: var(--measure); }
+
+  .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.3rem; }
+  .cols2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.6rem; }
+
+  .goal { display: flex; gap: 0.9rem; padding: 0.8rem 0; border-bottom: 1px solid var(--rule-soft); }
+  .goal:last-child { border-bottom: none; }
+  .goal .tgt {
+    font-family: var(--display); font-size: 1.5rem; font-weight: 600;
+    font-variant-numeric: tabular-nums; color: var(--accent);
+    min-width: 5.6rem; line-height: 1.2;
+  }
+  .goal .txt { flex: 1; }
+  .goal .txt .h { font-weight: 620; display: block; }
+  .goal .txt .d { color: var(--ink-2); font-size: 0.93rem; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.4rem;
+    color: var(--ink-3);
+    font-size: 0.84rem;
+  }
+  footer h3 { color: var(--ink-3); }
+  footer p { max-width: 78ch; margin-bottom: 0.6rem; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; padding: 0; }
+  footer li { padding-left: 1rem; text-indent: -1rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">Monthly Performance Report</p>
+      <h1>South Coast Demolition</h1>
+      <p class="sub">July 2026 &middot; Paid search and organic search</p>
+    </div>
+    <div class="meta">
+      <div><span class="k">Reporting period</span><span class="v">1 &ndash; 31 July 2026</span></div>
+      <div><span class="k">Campaigns live</span><span class="v">Demolition, plus GPR &amp; Concrete Cutting from 2 July</span></div>
+      <div><span class="k">Service area</span><span class="v">Orange County</span></div>
+      <div><span class="k">Google Ads account</span><span class="v">356-289-8662</span></div>
+      <div><span class="k">Prepared by</span><span class="v">Shapeshift Marketing</span></div>
+    </div>
+  </header>
+
+  <!-- ================= SUMMARY ================= -->
+  <section>
+    <div class="sec-head">
+      <h2>The month in short</h2>
+    </div>
+    <div class="prose">
+      <p>In July the advertising spent <strong>$1,084.56</strong> and produced <strong>10 tracked enquiries</strong>. Every one has since been listened to or read and judged individually, and <strong>six were real, workable jobs, at $180.76 each</strong>. That is the figure we will hold the advertising to from here, because a raw enquiry count can be flattered by robocalls and wrong numbers and a real job cannot.</p>
+      <p>The month had two halves. The <strong>GPR and concrete cutting campaign went live on 2 July</strong> with its own two landing pages, and in its first four weeks it produced half of the month's enquiries. The demolition campaign produced the other half.</p>
+      <p>Organic search was flat. The site earned <strong>35 clicks from Google</strong>, against 33 in June. The work done on 9 July, a rewritten home page title and a new site clearing page, has not produced clicks yet, and the new page has still not been indexed by Google three weeks after publication. We say more about that below, including what we would do differently.</p>
+      <p>The other significant piece of July was not visible in any number: <strong>the connection carrying your website enquiries had quietly stopped working</strong>. We found it, rebuilt it, and recovered the enquiries it had swallowed. That turned out to matter more than we first thought, and there is a section on it below.</p>
+      <p>Every one of July's 21 enquiries has since been listened to or read and judged individually. <strong>14 were real, workable jobs.</strong></p>
+    </div>
+    <div class="tiles">
+      <div class="tile lead"><span class="k">Ad spend</span><span class="v">$1,084.56</span><span class="n">two campaigns</span></div>
+      <div class="tile lead"><span class="k">Paid enquiries</span><span class="v">10</span><span class="n">$108.46 each</span></div>
+      <div class="tile lead"><span class="k">Cost per real job</span><span class="v">$180.76</span><span class="n">6 of the 10 were real</span></div>
+      <div class="tile"><span class="k">All enquiries</span><span class="v">21</span><span class="n">every channel</span></div>
+      <div class="tile lead"><span class="k">Real jobs</span><span class="v">14</span><span class="n">of the 21, reviewed one by one</span></div>
+      <div class="tile"><span class="k">Organic clicks</span><span class="v">35</span><span class="n">33 in June</span></div>
+    </div>
+  </section>
+
+  <!-- ================= PAID ================= -->
+  <section>
+    <div class="sec-head">
+      <h2>Paid search</h2>
+      <p class="lede">Two Search campaigns running across Orange County. Demolition has run all year; GPR and concrete cutting launched on 2 July, so July is its first month.</p>
+    </div>
+
+    <div class="tiles">
+      <div class="tile"><span class="k">Impressions</span><span class="v">1,499</span></div>
+      <div class="tile"><span class="k">Clicks</span><span class="v">80</span></div>
+      <div class="tile"><span class="k">Click rate</span><span class="v">5.34%</span></div>
+      <div class="tile"><span class="k">Cost per click</span><span class="v">$13.56</span></div>
+      <div class="tile"><span class="k">Spend</span><span class="v">$1,084.56</span></div>
+      <div class="tile lead"><span class="k">Enquiries</span><span class="v">10</span></div>
+      <div class="tile lead"><span class="k">Cost per enquiry</span><span class="v">$108.46</span></div>
+    </div>
+
+    <div class="note plain">
+      <span class="t">Why this report starts at July</span>
+      <p>July is the first month measured on the lead counting we now use, which reconciles every enquiry against both Google Ads and your call tracking. The months before it ran on duplicated conversion actions and a lead pipe that was dropping data, so their figures are not comparable to these on a like-for-like basis. We would rather report one month we can stand behind than a trend line built on two different rulers. <strong>From here the series is consistent.</strong></p>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>The two campaigns, July 2026</caption>
+        <thead>
+          <tr>
+            <th scope="col">Campaign</th>
+            <th class="num" scope="col">Impressions</th>
+            <th class="num" scope="col">Clicks</th>
+            <th class="num" scope="col">Click rate</th>
+            <th class="num" scope="col">Cost per click</th>
+            <th class="num" scope="col">Spend</th>
+            <th class="num" scope="col">Enquiries</th>
+            <th class="num" scope="col">Cost per enquiry</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-camp"></tbody>
+      </table>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>Ad group performance, July 2026</caption>
+        <thead>
+          <tr>
+            <th scope="col">Ad group</th>
+            <th scope="col">Campaign</th>
+            <th class="num" scope="col">Impressions</th>
+            <th class="num" scope="col">Clicks</th>
+            <th class="num" scope="col">Click rate</th>
+            <th class="num" scope="col">Spend</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-ag"></tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="t">Concrete cutting is working. Concrete scanning is not, yet</span>
+      <p>The two halves of the new campaign are behaving very differently. <strong>Concrete and saw cutting</strong> took $279.44, ran a 5.11% click rate, and every one of the tracked website enquiries from that campaign landed on the concrete cutting page. <strong>GPR and concrete scanning</strong> took $200.48, collected the most impressions of any ad group in the account at 532, and converted them at a 2.82% click rate with nothing to show for it.</p>
+      <p>The search terms explain it. Scanning attracts broad, research-shaped searches: <em>gpr</em> alone was shown 159 times for one click, <em>ground penetrating radar</em> 45 times for one. Cutting attracts people with a job: <em>concrete cutting near me</em> was shown 22 times and clicked 6. In August we will rewrite the scanning ads and page around the job rather than the technology, and if that does not move it we will move the money to cutting.</p>
+    </div>
+
+    <figure>
+      <figcaption>Clicks and spend, day by day through July.</figcaption>
+      <div class="chart-wrap" id="wrap-daily">
+        <div class="tip" id="tip-daily"></div>
+        <svg id="chart-daily" viewBox="0 0 760 220" role="img"
+             aria-label="Daily clicks in July 2026, ranging from 1 to 6 per day with no sustained trend, and daily spend between about $14 and $67."></svg>
+      </div>
+    </figure>
+
+    <div class="note">
+      <span class="t">What the ten paid enquiries actually were</span>
+      <p>Every one was listened to. <strong>Six were real, workable jobs</strong>: a soft-cutting enquiry on a large foundation, a directional core through a curb quoted at $750&ndash;850, an 85-foot driveway cut quoted at $700, a 40ft x 6ft concrete wall demolition, mudslide debris removal in Yorba Linda with the insurer paying, and an expansion-joint cut that reached a job walk.</p>
+      <p>Two were not: an automated call, and a Newport Beach concrete haul you judged too small and referred out. <strong>The remaining two reached voicemail and left no message</strong>, so they cannot be judged either way, but the numbers are still callable.</p>
+      <p>On six workable jobs, the month cost <strong>$180.76 per real job</strong>. That is the honest figure to hold the advertising to, and it is the one we will report against every month from here.</p>
+    </div>
+
+    <div class="note plain">
+      <span class="t">Half the paid calls did not reach you first time</span>
+      <p>Of the ten, three reached you live on that call. Three went to voicemail, one was a no-connect where the line opened and closed, and one was a 22 second call with nothing recorded. Two of the voicemail callers left a full message and both are workable, and one of the no-connect callers rang back an hour later and got to a job walk.</p>
+      <p>That persistence is lucky, not reliable. At $13.56 a click, a missed call is a paid click thrown away, and this is the cheapest available improvement in the whole account: it needs no more budget and no new pages.</p>
+    </div>
+
+    <div class="note plain">
+      <span class="t">One thing we want to watch: the last week produced nothing</span>
+      <p>Nine of July's ten paid enquiries arrived by 19 July, and the tenth on 23 July. From <strong>24 to 31 July the account spent $294.54 and produced no paid enquiries at all</strong>. This is not a tracking gap: website enquiries from other sources were captured normally on the 25th, 28th, 30th and 31st, so the system was working.</p>
+      <p>At this volume eight quiet days can be ordinary chance, and we are not going to over-read it. But it is the single thing we most want to see resolved in August, and it is the first thing we will check.</p>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>Top searches by spend, July 2026</caption>
+        <thead>
+          <tr>
+            <th scope="col">What was searched</th>
+            <th scope="col">Campaign</th>
+            <th class="num" scope="col">Shown</th>
+            <th class="num" scope="col">Clicks</th>
+            <th class="num" scope="col">Spend</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-terms"></tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="t">Both campaigns are now limited by budget</span>
+      <p>Demolition won <strong>68.9%</strong> of the auctions it was eligible for in July and lost <strong>17.7%</strong> of them purely because the daily budget ran out. GPR and cutting won <strong>57.3%</strong> and lost <strong>21.4%</strong> to budget, plus another 21.4% to ad rank.</p>
+      <p>In plain terms: there is demand in Orange County that these campaigns are qualified to answer and are being switched off before they can. Now that July has established an enquiry cost around $100, that lost share is worth buying. <strong>This is a recommendation, not something we have changed.</strong> Budget stays your call and we will not move it without you.</p>
+    </div>
+  </section>
+
+  <!-- ================= ORGANIC ================= -->
+  <section>
+    <div class="sec-head">
+      <h2>Organic search</h2>
+      <p class="lede">What Google sends southcoastdemo.com without advertising. This month the honest answer is: almost exactly what it sent last month.</p>
+    </div>
+
+    <div class="tiles">
+      <div class="tile lead"><span class="k">Clicks</span><span class="v">35</span><span class="n">33 in June, 25 in May</span></div>
+      <div class="tile"><span class="k">Times shown</span><span class="v">2,416</span><span class="n">2,467 in June</span></div>
+      <div class="tile"><span class="k">Click rate</span><span class="v">1.45%</span><span class="n">up from 1.34%</span></div>
+      <div class="tile"><span class="k">Pages earning clicks</span><span class="v">1</span><span class="n">of 14 pages shown</span></div>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>Google Search performance, three months</caption>
+        <thead>
+          <tr>
+            <th scope="col">Month</th>
+            <th class="num" scope="col">Clicks</th>
+            <th class="num" scope="col">Times shown</th>
+            <th class="num" scope="col">Click rate</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-gsc"></tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="t">The central problem: the home page is the whole website</span>
+      <p>All <strong>35</strong> of July's organic clicks went to the home page. Not most of them. All of them. Twelve other pages were shown in Google a combined <strong>129 times</strong> between them and earned <strong>zero clicks</strong>.</p>
+      <p>That is the single biggest constraint on organic growth here. A site where one page does all the work can only rank for what one page can plausibly be about, and it caps how much of Orange County you can appear in. Everything in the organic plan from here is aimed at getting a second, third and fourth page earning.</p>
+    </div>
+
+    <div class="note">
+      <span class="t">The finding that matters most: your flagship page is invisible</span>
+      <p>The pool demolition page, <em>/pool-demolition/</em>, was <strong>not shown in Google's organic results a single time in July</strong>. Not shown and not clicked: zero impressions. We checked May, June and the first days of August as well, and the answer is the same in every month. Pool demolition is the service the business is built around, it is the page that converts when people do reach it, and organically it does not exist.</p>
+      <p>Meanwhile the searches are there. <em>Pool removal</em>, <em>swimming pool removal</em> and <em>pool demolition contractor</em> all appeared in the paid search terms in July and cost around $19 a click. Every one of those clicks could have been free.</p>
+      <p>This changes the shape of the organic plan. Instead of building more new pages, August starts by working out why the pool page is not being served, and fixing that. It is a bigger prize than anything else on the organic list.</p>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>What actually earned clicks in July</caption>
+        <thead>
+          <tr>
+            <th scope="col">Search</th>
+            <th class="num" scope="col">Clicks</th>
+            <th class="num" scope="col">Shown</th>
+            <th class="num" scope="col">Position</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-gscq"></tbody>
+      </table>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>Ranking well, earning nothing &mdash; July's largest zero-click searches</caption>
+        <thead>
+          <tr>
+            <th scope="col">Search</th>
+            <th class="num" scope="col">Shown</th>
+            <th class="num" scope="col">Position</th>
+            <th class="num" scope="col">Clicks</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-gscz"></tbody>
+      </table>
+    </div>
+
+    <div class="note plain">
+      <span class="t">What we tried in July, and why we are calling it a miss</span>
+      <p>On 9 July we did two things. We rewrote the home page title to target the head terms the site already ranked well for but earned nothing from, and we built a new page, <em>Demolition &amp; Site Clearing Orange County</em>, aimed at a cluster of searches taking around 200 impressions a month at positions 6 to 9 with no page of their own.</p>
+      <p>Neither has worked so far, and we would rather say that than dress it up. The head terms still convert almost nothing: <em>demolition contractors</em> sat at position 1.0 across 29 impressions in July and produced 3 clicks. The new page is a harder problem: <strong>Google has not indexed it at all</strong>. It has been live since 9 July, it is in the sitemap, it is linked from the home page, the contact page and the pool page, it returns cleanly and it carries no blocking tag. It has simply never been served in a search result.</p>
+      <p>The lesson we are taking is that the original theory was wrong. We assumed these were click-rate problems, fixable with better titles. The impression counts say otherwise: strong positions on genuinely thin search volume. Rewriting titles cannot create demand that is not there. August's work moves to where demand demonstrably exists.</p>
+    </div>
+
+    <h3>Website visits</h3>
+    <div class="tiles">
+      <div class="tile"><span class="k">All sessions</span><span class="v">256</span><span class="n">214 in June</span></div>
+      <div class="tile"><span class="k">From paid search</span><span class="v">62</span><span class="n">27 in June</span></div>
+      <div class="tile"><span class="k">From organic search</span><span class="v">46</span><span class="n">58 in June</span></div>
+      <div class="tile"><span class="k">Direct visits</span><span class="v">120</span><span class="n">117 in June</span></div>
+    </div>
+    <p style="font-size:0.86rem;color:var(--ink-3);max-width:78ch;">Analytics counts organic sessions down 21% while Search Console counts organic clicks up 6%. The two measure different things: Search Console counts clicks from Google only and is the more reliable of the pair, so we lead with it. Analytics counts sessions from every search engine and counts a returning visitor again, which makes it noisier at this volume. Both are telling the same underlying story, which is that organic did not move in July.</p>
+  </section>
+
+  <!-- ================= LEADS ================= -->
+  <section>
+    <div class="sec-head">
+      <h2>Where the enquiries came from</h2>
+      <p class="lede">Every call and form across the whole business, not just advertising. Repeat callers are counted once.</p>
+    </div>
+
+    <div class="scroll">
+      <table>
+        <caption>Enquiries by source, June and July 2026</caption>
+        <thead>
+          <tr>
+            <th scope="col">Source</th>
+            <th class="num" scope="col">June</th>
+            <th class="num" scope="col">July</th>
+            <th class="num" scope="col">Change</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-src"></tbody>
+      </table>
+    </div>
+    <p style="font-size:0.86rem;color:var(--ink-3);max-width:78ch;">July's 21 enquiries came from 27 total calls and forms, six of which were repeat contacts from someone who had already been in touch. The paid figure of 10 is the same number the advertising section reports.</p>
+
+    <h3>Quality, judged one enquiry at a time</h3>
+    <div class="tiles">
+      <div class="tile lead"><span class="k">Real jobs</span><span class="v">14</span><span class="n">of 21 enquiries</span></div>
+      <div class="tile"><span class="k">Not workable</span><span class="v">5</span><span class="n">solicitation, robocall, wrong fit</span></div>
+      <div class="tile"><span class="k">Could not judge</span><span class="v">2</span><span class="n">voicemail, no message left</span></div>
+      <div class="tile"><span class="k">Real jobs from ads</span><span class="v">6</span><span class="n">$180.76 each</span></div>
+    </div>
+    <p style="font-size:0.86rem;color:var(--ink-3);max-width:78ch;">Every call was listened to and every form read. The two we could not judge were calls that reached voicemail where the caller hung up without speaking; those numbers are still worth ringing back, so we have left them open rather than writing them off.</p>
+
+    <div class="note">
+      <span class="t">The enquiry pipeline was broken</span>
+      <p>On 31 July we found that the connection carrying website form submissions into your lead tracking had <strong>stopped working entirely</strong>, and that even when it had been working it was only ever passing across the email address and phone number. The name and the message the customer typed were being dropped. That is why the contact name and message columns in your lead sheet have been empty for months.</p>
+      <p>Two enquiries were stranded and never arrived at all. Both were recovered and sent to you directly on 31 July: a Santa Ana homeowner with a sinkhole over a filled-in pool, and an enquiry about removing a concrete pool shell.</p>
+      <p>The connection has been rebuilt from scratch and no longer depends on the third-party service that failed. It now carries the full name, the full message and the service the customer selected, and it runs every fifteen minutes. We also added click-level tracking to every form, so from August we can tell you which advertising click produced which form enquiry.</p>
+    </div>
+
+    <div class="note plain">
+      <span class="t">What we could not measure this month</span>
+      <p>This report has no Google Business Profile section. Your Maps and local listing performance, the calls, direction requests and website clicks it generates, sit in a Google account we do not currently have access to. We would rather leave the section out than estimate it. Getting us view access to the Business Profile is a five minute job and it would add the missing third of the local picture from next month.</p>
+    </div>
+  </section>
+
+  <!-- ================= WORK ================= -->
+  <section>
+    <div class="sec-head">
+      <h2>Work completed</h2>
+      <p class="lede">What was done in July. Where a change landed at the very end of the month, its effect is not in the numbers above.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <h3>Advertising</h3>
+        <ul class="items" id="items-ads"></ul>
+      </div>
+      <div>
+        <h3>Website, search and tracking</h3>
+        <ul class="items" id="items-web"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NEXT ================= -->
+  <section>
+    <div class="sec-head">
+      <h2>Coming up</h2>
+      <p class="lede">What is queued for August, and the one decision we need from you.</p>
+    </div>
+    <ul class="items" id="items-next"></ul>
+  </section>
+
+  <!-- ================= GOALS ================= -->
+  <section>
+    <div class="sec-head">
+      <h2>Goals for August</h2>
+      <p class="lede">What we are aiming at, and how we will know whether we got there.</p>
+    </div>
+    <div id="goals"></div>
+  </section>
+
+  <footer>
+    <h3>About these numbers</h3>
+    <p>Every figure in this report was pulled live from source on 5 August 2026. Advertising figures come from the Google Ads API for the calendar month. Enquiry counts come from WhatConverts and from the Google Ads call asset, combined so that neither source is counted twice: website forms and calls to the tracking number come from WhatConverts and always carry a Google click identifier, while calls placed straight from an ad never touch the site and are counted once from Google Ads. Repeat contacts from the same person are counted once. Search clicks, impressions and positions come from Google Search Console for the property southcoastdemo.com. Website visits come from Google Analytics.</p>
+    <ul>
+      <li>&bull; Google Ads reports 8 conversions for July against our 10 enquiries. Its figure counts one call twice through two overlapping conversion actions, and misses the enquiries that reached your tracking without registering as a conversion. Ours is reconciled enquiry by enquiry.</li>
+      <li>&bull; Google withholds the rarer searches people used, so the named searches are a sample. Monthly totals are complete.</li>
+      <li>&bull; Search Console counts clicks from Google only. Google Analytics counts sessions from every search engine and counts a returning visitor again. The two are different measures and are not expected to match.</li>
+      <li>&bull; Lead quality is not a model or a score. Every call was listened to and every form read, one at a time, and marked in your lead tracking so you can see the judgement on each one. Where an enquiry could not honestly be judged it is left open rather than counted either way.</li>
+      <li>&bull; One internal test submission made on 31 July while verifying the new tracking is excluded from every figure in this report and from your lead sheet.</li>
+      <li>&bull; Google Business Profile performance is absent because we do not have access to the listing. No figure in this report estimates it.</li>
+      <li>&bull; Where a change was made at the end of July, it is dated. Work done on 31 July does not explain July's results.</li>
+    </ul>
+  </footer>
+</div>
+
+<script>
+/* ------------------------------------------------------------------
+   All report data lives in REPORT. To produce next month, or another
+   client, replace this object and the copy above; the rendering
+   below is generic.
+------------------------------------------------------------------ */
+const REPORT = {
+  // Pre-July months are deliberately absent. They were measured on duplicated
+  // conversion actions and a lead pipe that dropped data, so they are not
+  // comparable to July on a like-for-like basis and the report does not show a
+  // trend line across the two. The consistent series starts here.
+  // day, clicks, impressions, cost
+  paidDaily: [
+    [1,2,6,24.69],[2,1,28,14.52],[3,4,22,58.73],[4,1,27,14.58],[5,2,18,29.52],
+    [6,1,96,14.99],[7,4,38,67.14],[8,5,61,61.34],[9,1,83,14.78],[10,3,42,36.55],
+    [11,2,24,32.60],[12,2,36,30.94],[13,4,90,53.64],[14,6,98,59.82],[15,3,41,48.68],
+    [16,2,59,25.84],[17,4,49,47.42],[18,2,38,19.33],[19,3,19,44.29],[20,2,134,17.27],
+    [21,2,94,29.76],[22,2,31,19.40],[23,2,56,24.19],[24,2,68,30.74],[25,1,42,14.60],
+    [26,3,39,44.42],[27,3,23,47.35],[28,4,28,66.86],[29,3,60,42.29],[30,2,28,25.85],
+    [31,2,21,22.43]
+  ],
+  campaigns: [
+    { name: "Demolition", note: "running all year", impr: 517, clicks: 42, ctr: 0.0812, cpc: 14.40, cost: 604.64, leads: 5, cpl: 120.93 },
+    { name: "GPR &amp; concrete cutting", note: "live from 2 July", impr: 982, clicks: 38, ctr: 0.0387, cpc: 12.63, cost: 479.92, leads: 5, cpl: 95.98 }
+  ],
+  adGroups: [
+    { name: "Building demo", camp: "Demolition", impr: 336, clicks: 28, ctr: 0.0833, cost: 364.96 },
+    { name: "Concrete / saw cutting", camp: "GPR &amp; cutting", impr: 450, clicks: 23, ctr: 0.0511, cost: 279.44 },
+    { name: "Pool demo", camp: "Demolition", impr: 181, clicks: 14, ctr: 0.0773, cost: 239.68 },
+    { name: "GPR / concrete scanning", camp: "GPR &amp; cutting", impr: 532, clicks: 15, ctr: 0.0282, cost: 200.48 }
+  ],
+  terms: [
+    ["concrete cutting near me", "GPR &amp; cutting", 22, 6, 80.33],
+    ["pool demolition contractor", "Demolition", 5, 2, 37.88],
+    ["core drilling", "GPR &amp; cutting", 31, 3, 34.58],
+    ["demolition company near me", "Demolition", 24, 2, 30.88],
+    ["demolition contractor near me", "Demolition", 34, 3, 30.47],
+    ["demolition contractors near me", "Demolition", 15, 2, 29.61],
+    ["utility locating services", "GPR &amp; cutting", 3, 2, 28.48],
+    ["demolition companies near me", "Demolition", 24, 3, 27.19],
+    ["concrete cutting", "GPR &amp; cutting", 84, 2, 19.49],
+    ["pool removal", "Demolition", 6, 1, 18.87],
+    ["gpr scanning", "GPR &amp; cutting", 64, 1, 14.90],
+    ["ground penetrating radar", "GPR &amp; cutting", 45, 1, 14.56],
+    ["gpr", "GPR &amp; cutting", 159, 1, 13.54]
+  ],
+  gsc: [
+    ["May 2026", 25, 2887, 0.0087],
+    ["June 2026", 33, 2467, 0.0134],
+    ["July 2026", 35, 2416, 0.0145]
+  ],
+  gscQueries: [
+    ["south coast demolition", 5, 14, 2.1],
+    ["demolition contractors", 3, 29, 1.0],
+    ["demolition companies near me", 3, 20, 5.3],
+    ["demolition companies in california", 1, 1, 1.0]
+  ],
+  gscZero: [
+    ["concrete demolition in", 200, 2.3],
+    ["demolition services in", 129, 15.4],
+    ["demolition services near me", 59, 1.3],
+    ["demolition services", 40, 2.6],
+    ["structural demolition", 38, 1.0],
+    ["full-service demolition contractor", 36, 1.0],
+    ["demolition contractor", 34, 3.7],
+    ["excavation services orange county", 32, 1.1],
+    ["best residential demolition site clearing orange county ca", 32, 7.8],
+    ["residential demolition site clearing orange county", 31, 7.2],
+    ["affordable residential demolition site clearing orange county ca", 30, 6.8],
+    ["orange county demolition", 28, 7.4]
+  ],
+  sources: [
+    ["Paid search", 1, 10],
+    ["Website forms and untracked calls", 4, 10],
+    ["Organic search", 1, 1]
+  ],
+  workAds: [
+    { t: "Launched the GPR and concrete cutting campaign", d: "2 July", b: "Two dedicated landing pages, 24 exact-match keywords across scanning and cutting, 26 negative keywords to keep out job seekers, DIY and equipment hire, and its own enquiry form. It produced the cheapest enquiries in the account in its first month." },
+    { t: "Cleaned up conversion tracking", d: "31 July", b: "The account was counting eight different actions as conversions, including four left over from a paused Smart campaign and two that double-counted every call and every form. Four were demoted so the reported numbers now mean one thing each." }
+  ],
+  workWeb: [
+    { t: "Rewrote the home page title and description", d: "9 July", b: "Aimed at the head terms the site already ranked for and earned nothing from. Has not moved clicks yet, see the organic section." },
+    { t: "Built and published a site clearing page", d: "9 July", b: "Demolition &amp; Site Clearing Orange County, around 750 words, added to the Services menu and linked from four other pages. Google has not indexed it yet." },
+    { t: "Internal linking pass into the pool demolition page", d: "9 July", b: "Contextual links added from three pool articles into the flagship service page, to concentrate authority on the page that actually converts." },
+    { t: "Rebuilt the enquiry pipeline", d: "31 July", b: "Replaced the failed third-party connection with a direct one. Full name, message and selected service now carried through. Two stranded enquiries recovered and sent to you." },
+    { t: "Added click-level tracking to every form", d: "31 July", b: "Including across pages, so someone who arrives on the pool page from an ad and enquires from the contact page three days later is still attributed correctly. Tested end to end." }
+  ],
+  next: [
+    { p: "next", t: "Chase indexing on the site clearing page", b: "Request indexing directly in Search Console. If it is still not indexed by mid-August, the page needs rethinking rather than more waiting." },
+    { p: "next", t: "Fix or reallocate the concrete scanning ad group", b: "Rewrite the ads and page around the job rather than the technology. If the click rate does not move, the budget goes to concrete cutting, which is working." },
+    { p: "next", t: "Investigate the quiet last week of July", b: "Eight days, $294.54 and no paid enquiries. Checking ad serving, call routing and search term mix before assuming it was chance." },
+    { p: "you", t: "Decision needed: do you want commercial demolition work?", b: "Google already ranks the site on page one for commercial demolition contractor, and a cluster of commercial searches is taking impressions every month with no page to send them to and no ads pointed at them. The account and the site are currently positioned residential. If commercial work is something you want, building that page is the highest-return organic job available and we would do it first. If it is not, we will stop treating those impressions as an opportunity." },
+    { p: "you", t: "Access needed: Google Business Profile", b: "View access to the listing so next month's report can cover Maps calls, direction requests and local visibility. Five minute job at your end." },
+    { p: "you", t: "Recommendation: raise the daily budgets", b: "Both campaigns are losing impressions because they run out of money. Now that enquiry cost is around $100 that lost share is worth buying. We will not change a budget without your say so." }
+  ],
+  goals: [
+    { tgt: "under $150", h: "Hold cost per enquiry below $150 while spend grows", d: "July came in at $108.46. Some of that is a new campaign in its honeymoon and we would expect it to settle, so holding under $150 with more spend behind it is the realistic target rather than beating July outright." },
+    { tgt: "12+", h: "Twelve or more paid enquiries", d: "Ten in July. Twelve at a stable cost per enquiry means the volume is coming from reach rather than luck." },
+    { tgt: "indexed", h: "Get the site clearing page into Google's index", d: "It cannot earn a click until Google will show it. This is a yes or no result, not a gradual one, and if the answer is still no by mid-August the approach changes." },
+    { tgt: "2+", h: "A second page earning organic clicks", d: "Right now the home page earns 100% of organic clicks. Any inner page earning its first clicks is the leading indicator that the site is broadening. That is the real measure of organic progress this quarter, not the total." },
+    { tgt: "under $180", h: "Hold cost per REAL job below $180", d: "July came in at $180.76 per workable job, on six of ten paid enquiries. Now that every enquiry is reviewed, this is the number we will report against from here, because cost per enquiry can be flattered by junk and this cannot." }
+  ]
+};
+
+/* ---------------- helpers ---------------- */
+const $ = (id) => document.getElementById(id);
+const SVGNS = "http://www.w3.org/2000/svg";
+const money = (n, dp = 2) =>
+  "$" + n.toLocaleString("en-US", { minimumFractionDigits: dp, maximumFractionDigits: dp });
+const pct = (n, dp = 2) => (n * 100).toFixed(dp) + "%";
+const num = (n) => n.toLocaleString("en-US");
+
+function el(tag, attrs = {}, text) {
+  const n = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (text != null) n.textContent = text;
+  return n;
+}
+function row(cells) {
+  const tr = document.createElement("tr");
+  cells.forEach((c) => {
+    const td = document.createElement("td");
+    if (c.num) td.className = "num";
+    td.innerHTML = c.h;
+    tr.appendChild(td);
+  });
+  return tr;
+}
+
+/* Tooltip wired to invisible hit rects. One implementation for every chart. */
+function wireTip(wrapId, tipId) {
+  const wrap = $(wrapId), tip = $(tipId);
+  return (target, html) => {
+    target.addEventListener("pointerenter", (e) => {
+      tip.innerHTML = html;
+      tip.classList.add("on");
+      const wr = wrap.getBoundingClientRect(), r = e.target.getBoundingClientRect();
+      tip.style.left = (r.left - wr.left + r.width / 2 + wrap.scrollLeft) + "px";
+      tip.style.top = (r.top - wr.top) + "px";
+    });
+    target.addEventListener("pointerleave", () => tip.classList.remove("on"));
+  };
+}
+
+/* ---------------- chart: daily clicks + spend ---------------- */
+(function () {
+  const svg = $("chart-daily"), W = 760, H = 220;
+  const L = 34, R = 40, T = 18, B = 30;
+  const data = REPORT.paidDaily;
+  const maxC = 6, maxS = 70;
+  const iw = W - L - R, ih = H - T - B;
+  const bw = iw / data.length;
+  const yc = (v) => T + ih - (v / maxC) * ih;
+  const ys = (v) => T + ih - (v / maxS) * ih;
+  const tip = wireTip("wrap-daily", "tip-daily");
+
+  [0, 2, 4, 6].forEach((v) => {
+    svg.appendChild(el("line", { class: "grid-line", x1: L, x2: W - R, y1: yc(v), y2: yc(v) }));
+    svg.appendChild(el("text", { class: "axis-txt", x: L - 6, y: yc(v) + 3.4, "text-anchor": "end" }, v));
+  });
+  [0, 35, 70].forEach((v) => {
+    svg.appendChild(el("text", { class: "axis-txt", x: W - R + 6, y: ys(v) + 3.4 }, "$" + v));
+  });
+
+  data.forEach((d, i) => {
+    const [day, clicks] = d;
+    const x = L + i * bw + bw * 0.2;
+    const w = bw * 0.6;
+    svg.appendChild(el("rect", {
+      x, y: yc(clicks), width: w, height: T + ih - yc(clicks), fill: "var(--s1)", "fill-opacity": 0.75
+    }));
+  });
+
+  const pts = data.map((d, i) => `${(L + i * bw + bw / 2).toFixed(1)},${ys(d[3]).toFixed(1)}`).join(" ");
+  svg.appendChild(el("polyline", { points: pts, fill: "none", stroke: "var(--s4)", "stroke-width": 1.6 }));
+
+  data.forEach((d, i) => {
+    const [day, clicks, impr, cost] = d;
+    if (day % 5 === 0 || day === 1)
+      svg.appendChild(el("text", { class: "axis-txt", x: L + i * bw + bw / 2, y: H - 10, "text-anchor": "middle" }, day));
+    const hit = el("rect", { class: "hit", x: L + i * bw, y: T, width: bw, height: ih });
+    svg.appendChild(hit);
+    tip(hit, `${day} July<br>${clicks} click${clicks === 1 ? "" : "s"} \u00B7 ${money(cost)}<br>${num(impr)} impressions`);
+  });
+})();
+
+const legend = document.createElement("div");
+legend.className = "legend";
+legend.innerHTML =
+  '<span><span class="swatch" style="background:var(--s1)"></span>Clicks (left axis)</span>' +
+  '<span><span class="swatch" style="background:var(--s4)"></span>Spend (right axis)</span>';
+$("wrap-daily").parentNode.appendChild(legend);
+
+/* ---------------- tables ---------------- */
+(function () {
+  const tb = $("tbody-camp");
+  let ti = 0, tc = 0, tcost = 0, tl = 0;
+  REPORT.campaigns.forEach((c) => {
+    ti += c.impr; tc += c.clicks; tcost += c.cost; tl += c.leads;
+    tb.appendChild(row([
+      { h: `<strong>${c.name}</strong><span class="sm">${c.note}</span>` },
+      { h: num(c.impr), num: 1 }, { h: num(c.clicks), num: 1 },
+      { h: pct(c.ctr), num: 1 }, { h: money(c.cpc), num: 1 },
+      { h: money(c.cost), num: 1 }, { h: c.leads, num: 1 }, { h: money(c.cpl), num: 1 }
+    ]));
+  });
+  const tr = row([
+    { h: "Total" }, { h: num(ti), num: 1 }, { h: num(tc), num: 1 },
+    { h: pct(tc / ti), num: 1 }, { h: money(tcost / tc), num: 1 },
+    { h: money(tcost), num: 1 }, { h: tl, num: 1 }, { h: money(tcost / tl), num: 1 }
+  ]);
+  tr.className = "total";
+  tb.appendChild(tr);
+})();
+
+(function () {
+  const tb = $("tbody-ag");
+  const max = Math.max(...REPORT.adGroups.map((a) => a.cost));
+  REPORT.adGroups.forEach((a) => {
+    tb.appendChild(row([
+      { h: `<strong>${a.name}</strong>` }, { h: `<span style="color:var(--ink-3)">${a.camp}</span>` },
+      { h: num(a.impr), num: 1 }, { h: num(a.clicks), num: 1 },
+      { h: pct(a.ctr), num: 1 }, { h: money(a.cost), num: 1 }
+    ]));
+  });
+})();
+
+(function () {
+  const tb = $("tbody-terms");
+  REPORT.terms.forEach(([t, c, i, cl, cost]) => {
+    tb.appendChild(row([
+      { h: `<em>${t}</em>` }, { h: `<span style="color:var(--ink-3)">${c}</span>` },
+      { h: num(i), num: 1 }, { h: cl, num: 1 }, { h: money(cost), num: 1 }
+    ]));
+  });
+})();
+
+(function () {
+  const tb = $("tbody-gsc");
+  REPORT.gsc.forEach(([m, c, i, r], idx) => {
+    const tr = row([
+      { h: idx === REPORT.gsc.length - 1 ? `<strong>${m}</strong>` : m },
+      { h: num(c), num: 1 }, { h: num(i), num: 1 }, { h: pct(r), num: 1 }
+    ]);
+    tb.appendChild(tr);
+  });
+})();
+
+(function () {
+  const tb = $("tbody-gscq");
+  REPORT.gscQueries.forEach(([q, c, i, p]) => {
+    tb.appendChild(row([{ h: `<em>${q}</em>` }, { h: c, num: 1 }, { h: num(i), num: 1 }, { h: p.toFixed(1), num: 1 }]));
+  });
+})();
+
+(function () {
+  const tb = $("tbody-gscz");
+  REPORT.gscZero.forEach(([q, i, p]) => {
+    tb.appendChild(row([{ h: `<em>${q}</em>` }, { h: num(i), num: 1 }, { h: p.toFixed(1), num: 1 }, { h: "0", num: 1 }]));
+  });
+})();
+
+(function () {
+  const tb = $("tbody-src");
+  let jn = 0, jl = 0;
+  REPORT.sources.forEach(([s, jun, jul]) => {
+    jn += jun; jl += jul;
+    const diff = jul - jun;
+    const col = diff > 0 ? "var(--good)" : diff < 0 ? "var(--attn)" : "var(--ink-3)";
+    tb.appendChild(row([
+      { h: s }, { h: jun, num: 1 }, { h: `<strong>${jul}</strong>`, num: 1 },
+      { h: `<span style="color:${col}">${diff > 0 ? "+" : ""}${diff}</span>`, num: 1 }
+    ]));
+  });
+  const tr = row([{ h: "Total" }, { h: jn, num: 1 }, { h: jl, num: 1 },
+    { h: `<span style="color:var(--good)">+${jl - jn}</span>`, num: 1 }]);
+  tr.className = "total";
+  tb.appendChild(tr);
+})();
+
+/* ---------------- lists ---------------- */
+function renderItems(id, arr) {
+  const ul = $(id);
+  arr.forEach((it) => {
+    const li = document.createElement("li");
+    let hd = `<div class="hd"><span class="ttl">${it.t}</span>`;
+    if (it.d) hd += `<span class="dt">${it.d}</span>`;
+    if (it.p === "next") hd += `<span class="pill next">Queued</span>`;
+    if (it.p === "you") hd += `<span class="pill you">Needs your call</span>`;
+    if (it.d && !it.p) hd += `<span class="pill done">Done</span>`;
+    hd += `</div>`;
+    li.innerHTML = hd + (it.b ? `<div class="bd">${it.b}</div>` : "");
+    ul.appendChild(li);
+  });
+}
+renderItems("items-ads", REPORT.workAds);
+renderItems("items-web", REPORT.workWeb);
+renderItems("items-next", REPORT.next);
+
+(function () {
+  const box = $("goals");
+  REPORT.goals.forEach((g) => {
+    const d = document.createElement("div");
+    d.className = "goal";
+    d.innerHTML = `<div class="tgt">${g.tgt}</div><div class="txt"><span class="h">${g.h}</span><span class="d">${g.d}</span></div>`;
+    box.appendChild(d);
+  });
+})();
+</script>
+
+</body>
+</html>
