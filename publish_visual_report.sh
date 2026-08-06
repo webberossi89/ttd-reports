@@ -25,7 +25,19 @@
 #
 set -euo pipefail
 
-CLIENT="${1:?usage: publish_visual_report.sh <client-slug> <YYYY-MM> <report.html> [emoji]}"
+# --force (or PUBLISH_FORCE=1) bypasses the concurrent-restage guard near the
+# deploy. Strip it out before the positional args are read.
+FORCE="${PUBLISH_FORCE:-0}"
+_args=()
+for _a in "$@"; do
+  case "$_a" in
+    --force) FORCE=1 ;;
+    *)       _args+=("$_a") ;;
+  esac
+done
+set -- ${_args[@]+"${_args[@]}"}
+
+CLIENT="${1:?usage: publish_visual_report.sh <client-slug> <YYYY-MM> <report.html> [emoji] [--force]}"
 MONTH="${2:?missing month, format YYYY-MM}"
 SRC="${3:?missing path to report html}"
 EMOJI="${4:-}"
@@ -197,6 +209,47 @@ for known in $(cat "$ROOT/.deployed-clients" 2>/dev/null); do
     exit 1
   fi
 done
+
+# ---------------------------------------------------------------------------
+# CONCURRENT-RESTAGE GUARD
+#
+# `wrangler pages deploy` uploads the WHOLE tree, so publishing one client also
+# publishes whatever any OTHER session has just restaged, ready or not. The
+# .deployed-clients check above catches a client going MISSING; this catches a
+# client going live EARLY, which is the quieter failure.
+#
+# Confirmed 2026-08-06: republishing 365-pools at 00:13 also pushed
+# south-coast-demo live (60,045 -> 55,646 bytes) because another session had
+# rewritten its staged files at 00:12:45. Wrangler said only "Uploaded 2 files"
+# and named nobody.
+#
+# -mindepth 2 skips this run's own root index.html / 404.html.
+#
+# USE -mmin, NOT -newermt. `find` on this box is bfs, not GNU findutils, and bfs
+# rejects relative timestamps ("-10 minutes") accepting only ISO 8601. With a
+# 2>/dev/null on the end that failure is SILENT and the guard matches nothing,
+# i.e. it looks installed and protects you from exactly zero. Do not "tidy" the
+# stderr away either; a broken guard must be loud.
+# ---------------------------------------------------------------------------
+FRESH_MIN="${PUBLISH_FRESH_MINUTES:-10}"
+fresh_others="$(find "$SITE" -mindepth 2 -name '*.html' \
+                  -mmin "-${FRESH_MIN}" \
+                  -not -path "$SITE/$CLIENT/*" \
+                  -printf '%TY-%Tm-%Td %TH:%TM  %p\n' | sort)"
+
+if [[ -n "$fresh_others" ]]; then
+  if [[ "$FORCE" != "1" ]]; then
+    echo "REFUSING TO DEPLOY: another client was restaged in the last ${FRESH_MIN} min." >&2
+    echo "$fresh_others" | sed 's|^|  |' >&2
+    echo >&2
+    echo "Deploying uploads the WHOLE tree, so that work goes live too, ready or not." >&2
+    echo "Another session is probably mid-publish. Ask before continuing." >&2
+    echo "If you are certain it is ready, re-run with --force." >&2
+    exit 1
+  fi
+  echo "WARNING: --force given. These recently restaged files go live too:" >&2
+  echo "$fresh_others" | sed 's|^|  |' >&2
+fi
 
 # Record what this deploy contains, so the next run can detect a missing client.
 find "$SITE" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort > "$ROOT/.deployed-clients"
