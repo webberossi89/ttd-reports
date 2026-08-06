@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<title>MCI Waste | July 2026 Report</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%97%91%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<style>body{margin:0;padding:0}img{max-width:100%}
+:root,html,body{color-scheme:light !important}</style>
+</head>
+<body>
+<style>
+:root{
+
+    color-scheme: light;
+    --ground:      #F1EFEA;
+    --surface:     #FBFAF8;
+    --surface-2:   #FFFFFF;
+    --ink:         #1A1714;
+    --ink-2:       #57514A;
+    --ink-3:       #867F74;
+    --rule:        #DDD8CE;
+    --rule-soft:   #E9E5DC;
+    --accent:      #8A6410;
+    --accent-mark: #B07C10;
+    --accent-wash: #F3E9CE;
+
+    --s1: #B07C10;  /* brass  */
+    --s2: #0E8A66;  /* jade   */
+    --s3: #2F5FA8;  /* blue   */
+    --s4: #A32C46;  /* claret */
+
+    --ramp-1: #7A5A0E;
+    --ramp-2: #A87E1A;
+    --ramp-3: #CDA854;
+    --ramp-4: #E6D3A0;
+    --ramp-0: #C6C0B5;
+
+    --geo-1: #1B7A3E;
+    --geo-2: #4C9A45;
+    --geo-3: #86B23C;
+    --geo-4: #D2A017;
+    --geo-5: #DE7A22;
+    --geo-6: #C23B2E;
+    --geo-0: #9E9A93;
+
+    --good:      #2F7A55;
+    --good-bg:   #E4F0E8;
+    --attn:      #A85A12;
+    --attn-bg:   #F8E9DA;
+    --neutral-bg:#EAE6DD;
+
+    --display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+
+    --measure: 68ch;
+    --pad: clamp(1.1rem, 3vw, 2rem);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;
+  line-height:1.62;-webkit-font-smoothing:antialiased;margin:0}
+.page{max-width:1120px;margin:0 auto;padding:clamp(1rem,4vw,3.5rem) clamp(.9rem,3vw,2rem) 5rem;
+  display:flex;flex-direction:column;gap:clamp(1.4rem,3vw,2.4rem)}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.015em;line-height:1.15;margin:0}
+p{margin:0 0 .9rem}
+a{color:var(--accent)}
+.prose{max-width:var(--measure)}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin:0}
+
+.masthead{border-top:3px solid var(--accent-mark);padding-top:1.6rem;display:flex;
+  flex-direction:column;gap:.4rem}
+.masthead h1{font-size:clamp(2.4rem,7vw,4rem);line-height:1.02;margin:.35rem 0 0;text-wrap:balance}
+.masthead .meta{color:var(--ink-2);font-size:.95rem}
+
+section{display:flex;flex-direction:column;gap:1rem}
+.sec-head{display:flex;flex-direction:column;gap:.3rem}
+.sec-head h2{font-size:clamp(1.5rem,3.4vw,2.1rem)}
+.sec-head .note{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3)}
+
+.tiles{display:grid;gap:.55rem;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr))}
+.tile{background:var(--surface-2);padding:.95rem 1rem 1rem;display:flex;flex-direction:column;gap:.1rem}
+.tile .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.tile .v{font-family:var(--display);font-size:clamp(1.4rem,3.2vw,1.9rem);font-weight:600;
+  font-variant-numeric:tabular-nums;line-height:1.1}
+.tile .s{font-size:.8rem;color:var(--ink-2)}
+.pill{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.1em;text-transform:uppercase;padding:.18rem .45rem;border-radius:2px;white-space:nowrap}
+.pill.up{background:var(--good-bg);color:var(--good)}
+.pill.attn{background:var(--attn-bg);color:var(--attn)}
+
+.credit{background:var(--ink);color:#F3F0E9;padding:clamp(1.3rem,3.4vw,2rem);
+  display:flex;flex-direction:column;gap:.2rem}
+.credit .eyebrow{color:var(--ramp-3)}
+.credit h2{color:#FBFAF8;font-size:clamp(1.6rem,4vw,2.4rem);margin:.3rem 0 .6rem}
+.credit p{color:#CFC9BE;max-width:var(--measure)}
+.credit b{color:#FBFAF8}
+.credit .bigrow{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));
+  margin:1.1rem 0 .3rem}
+.credit .big{font-family:var(--display);font-size:clamp(1.6rem,4vw,2.3rem);font-weight:600;
+  color:var(--ramp-3);font-variant-numeric:tabular-nums;line-height:1.1}
+.credit .biglab{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  color:#8F887C}
+.track{height:22px;background:#2A2621;position:relative;margin:.9rem 0 .45rem}
+.track .fill{height:100%;background:var(--ramp-3)}
+.tracklabs{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.66rem;
+  letter-spacing:.06em;color:#8F887C;font-variant-numeric:tabular-nums}
+
+.chart-wrap{background:var(--surface-2);padding:1rem .9rem .6rem;overflow-x:auto}
+.chart{display:block;min-width:34rem;width:100%;height:210px}
+.legend{display:flex;gap:1rem;flex-wrap:wrap;font-family:var(--mono);font-size:.66rem;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-top:.6rem}
+.swatch{display:inline-block;width:.7rem;height:.7rem;margin-right:.3rem;vertical-align:-1px}
+
+.scroll{overflow-x:auto;background:var(--surface-2)}
+table{border-collapse:collapse;width:100%;min-width:32rem;font-size:.9rem}
+th,td{text-align:right;padding:.58rem .8rem;border-bottom:1px solid var(--rule-soft);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+thead th{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);border-bottom:1px solid var(--rule)}
+tbody tr:last-child td{border-bottom:0}
+tr.tot td{font-weight:700;border-top:1px solid var(--rule)}
+
+.surf{background:var(--surface-2);padding:1rem 1.1rem}
+.surf-row{display:grid;grid-template-columns:minmax(9rem,15rem) 1fr auto;gap:.8rem;align-items:center;
+  padding:.45rem 0;border-bottom:1px solid var(--rule-soft);font-size:.9rem}
+.surf-row:last-child{border-bottom:0}
+.surf-bar{height:10px;background:var(--rule-soft)}
+.surf-bar span{display:block;height:100%}
+.surf-v{font-family:var(--mono);font-size:.8rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+.items{list-style:none;margin:0;padding:0}
+.items li{padding:.55rem 0;border-bottom:1px solid var(--rule-soft);max-width:var(--measure)}
+.items li:last-child{border-bottom:0}
+.goal{display:flex;gap:.9rem;padding:.85rem 0;border-bottom:1px solid var(--rule-soft);
+  max-width:var(--measure)}
+.goal:last-of-type{border-bottom:0}
+.goal b{font-family:var(--display);font-weight:600}
+.cols{display:grid;gap:1.6rem;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr))}
+.foot{padding-top:1rem;border-top:1px solid var(--rule);color:var(--ink-3);font-size:.82rem}
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <div class="eyebrow">Monthly performance report</div>
+    <h1>MCI Waste</h1>
+    <div class="meta">July 2026 &middot; Google Ads and organic search &middot; prepared by Shapeshift Marketing</div>
+  </header>
+
+  <!-- ============ CREDIT PUSH ============ -->
+  <section class="credit" >
+    <div class="eyebrow" >Priority this month</div>
+    <h2>Tracking toward the $20,000 Google Ads credit</h2>
+    <p>Google is offering a <b>$20,000 advertising credit</b> once the account reaches
+      <b>$10,000 in total spend by 21 August</b>. At the current budget that credit is worth close to three further
+      months of advertising, at no cost. Hitting it is the single
+      highest-value thing this account can do in August, so it is shaping how we are pacing spend.</p>
+
+    <div class="bigrow">
+      <div>
+        <div class="biglab">Spent to date</div>
+        <div class="big">$7,085.86</div>
+      </div>
+      <div>
+        <div class="biglab">Still to go</div>
+        <div class="big">$2,914.14</div>
+      </div>
+      <div>
+        <div class="biglab">Days remaining</div>
+        <div class="big">15</div>
+      </div>
+      <div>
+        <div class="biglab">Needed per day</div>
+        <div class="big">$194</div>
+      </div>
+    </div>
+
+    <div class="track" aria-label="70.9 percent of the $10,000 threshold reached">
+      <div class="fill" style="width:70.9%"></div>
+    </div>
+    <div class="tracklabs"><span>$0</span><span>70.9% reached</span><span>$10,000 &middot; 21 Aug</span></div>
+
+    <p style="margin-top:1rem"><b>We are on track.</b> The account is currently
+      running at about $223 a day, comfortably above the $194 a day required. If that pace holds,
+      the account crosses $10,000 on or around <b>19 August</b>, roughly two days
+      before the deadline, finishing the period near $10,400.</p>
+    <p style="margin-bottom:0">The margin is real but it is not large, so we are watching daily rather
+      than weekly. If spend slows, the existing daily budgets have enough headroom to make up the
+      difference without any additional investment from you.</p>
+  </section>
+
+  <!-- ============ MONTH IN SHORT ============ -->
+  <section>
+    <div class="sec-head"><h2>The month in short</h2></div>
+    <div class="tiles">
+      <div class="tile"><div class="k">Ad spend</div><div class="v">$5,606.54</div><div class="s">July</div></div>
+      <div class="tile"><div class="k">Clicks</div><div class="v">482</div><div class="s">7.32% click rate</div></div>
+      <div class="tile"><div class="k">Impressions</div><div class="v">6,587</div><div class="s">times your ads showed</div></div>
+      <div class="tile"><div class="k">Leads recorded</div><div class="v">104</div><div class="s">calls and forms from ads</div></div>
+      <div class="tile"><div class="k">Quotable leads</div><div class="v">74</div><div class="s"><span class="pill up">71% of leads</span></div></div>
+      <div class="tile"><div class="k">Cost per quotable lead</div><div class="v">$75.76</div><div class="s">July average</div></div>
+    </div>
+    <div class="prose">
+      <p>July was the first full month of advertising, following the launch on 24 June. The account
+        spent $5,606.54 and generated 104 tracked leads, of which 74 were genuine, workable
+        enquiries. That is a cost of $75.76 per quotable lead across a month that included both
+        campaigns finding their footing.</p>
+      <p>Organic search is at a much earlier stage, which is normal for a site that went live in
+        June. Visibility is climbing quickly, but rankings are not yet high enough to produce
+        meaningful click volume. The detail is further down.</p>
+    </div>
+  </section>
+
+  <!-- ============ PAID ============ -->
+  <section>
+    <div class="sec-head"><h2>Google Ads</h2><span class="note">1 &ndash; 31 July 2026</span></div>
+    <div class="chart-wrap">
+      <svg class="chart" viewBox="0 0 720 210" role="img"
+           aria-label="Daily ad spend through July 2026, peaking at $369 on 20 July.">
+        <g stroke="#E9E5DC" stroke-width="1">
+          <line x1="34" y1="20"  x2="710" y2="20"/>
+          <line x1="34" y1="65"  x2="710" y2="65"/>
+          <line x1="34" y1="110" x2="710" y2="110"/>
+          <line x1="34" y1="155" x2="710" y2="155"/>
+        </g>
+        <g fill="#867F74" font-size="9" font-family="ui-monospace,monospace">
+          <text x="30" y="23"  text-anchor="end">$400</text>
+          <text x="30" y="68"  text-anchor="end">$300</text>
+          <text x="30" y="113" text-anchor="end">$200</text>
+          <text x="30" y="158" text-anchor="end">$100</text>
+          <text x="30" y="203" text-anchor="end">$0</text>
+        </g>
+        <line x1="34" y1="200" x2="710" y2="200" stroke="#57514A" stroke-width="1.5"/>
+        <g fill="var(--s1)">
+          <rect x="40" y="173.4" width="16" height="26.6"/>
+          <rect x="62" y="117.9" width="16" height="82.1"/>
+          <rect x="84" y="199.5" width="16" height="0.5"/>
+          <rect x="150" y="130.8" width="16" height="69.2"/>
+          <rect x="172" y="98.4" width="16" height="101.6"/>
+          <rect x="194" y="98.7" width="16" height="101.3"/>
+          <rect x="216" y="96.5" width="16" height="103.5"/>
+          <rect x="238" y="163.5" width="16" height="36.5"/>
+          <rect x="260" y="163.4" width="16" height="36.6"/>
+          <rect x="282" y="155.6" width="16" height="44.4"/>
+          <rect x="304" y="39.2" width="16" height="160.8"/>
+          <rect x="326" y="64.4" width="16" height="135.6"/>
+          <rect x="348" y="68.0" width="16" height="132.0"/>
+          <rect x="370" y="90.5" width="16" height="109.5"/>
+          <rect x="392" y="108.0" width="16" height="92.0"/>
+          <rect x="414" y="133.9" width="16" height="66.1"/>
+          <rect x="436" y="152.7" width="16" height="47.3"/>
+          <rect x="458" y="33.8" width="16" height="166.2"/>
+          <rect x="480" y="83.5" width="16" height="116.5"/>
+          <rect x="502" y="114.7" width="16" height="85.3"/>
+          <rect x="524" y="119.0" width="16" height="81.0"/>
+          <rect x="546" y="106.6" width="16" height="93.4"/>
+          <rect x="568" y="166.5" width="16" height="33.5"/>
+          <rect x="590" y="179.4" width="16" height="20.6"/>
+          <rect x="612" y="42.6" width="16" height="157.4"/>
+          <rect x="634" y="78.4" width="16" height="121.6"/>
+          <rect x="656" y="92.4" width="16" height="107.6"/>
+          <rect x="678" y="104.7" width="16" height="95.3"/>
+          <rect x="700" y="101.1" width="10" height="98.9"/>
+        </g>
+        <g fill="#867F74" font-size="9" font-family="ui-monospace,monospace">
+          <text x="48"  y="209" text-anchor="middle">1</text>
+          <text x="312" y="209" text-anchor="middle">13</text>
+          <text x="466" y="209" text-anchor="middle">20</text>
+          <text x="620" y="209" text-anchor="middle">27</text>
+          <text x="705" y="209" text-anchor="middle">31</text>
+        </g>
+      </svg>
+      <div class="legend"><span><span class="swatch" style="background:var(--s1)"></span>Daily ad spend</span>
+        <span style="color:var(--ink-3)">No spend recorded 4 &ndash; 5 July.</span></div>
+    </div>
+
+    <h3 style="margin:1.6rem 0 .6rem;font-size:1.05rem">The two campaigns are doing different jobs</h3>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Campaign</th><th>Impressions</th><th>Clicks</th><th>Click rate</th><th>Spend</th><th>Cost per click</th></tr></thead>
+        <tbody>
+          <tr><td>Dumpster Rentals (core search)</td><td>994</td><td>169</td><td>17.00%</td><td>$3,023.06</td><td>$17.89</td></tr>
+          <tr><td>AI Max (broad discovery)</td><td>5,593</td><td>313</td><td>5.60%</td><td>$2,583.48</td><td>$8.25</td></tr>
+          <tr class="tot"><td>Total</td><td>6,587</td><td>482</td><td>7.32%</td><td>$5,606.54</td><td>$11.63</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose" style="margin-top:.9rem">
+      <p>These two campaigns are deliberately different and should be read separately. The core search
+        campaign targets people typing exactly what you rent; it converts at a high click rate but the
+        clicks are expensive at $17.89. The AI Max campaign casts wider to find demand you would
+        otherwise miss, and its clicks cost less than half as much at $8.25.</p>
+      <p>Both are earning their place. Reporting them as a single blended number would hide the fact
+        that they behave nothing alike.</p>
+    </div>
+  </section>
+
+  <!-- ============ LEAD QUALITY ============ -->
+  <section>
+    <div class="sec-head"><h2>Lead quality</h2><span class="note">every July lead reviewed individually</span></div>
+    <div class="prose">
+      <p>We listened to and reviewed every lead the ads produced in July rather than reporting a raw
+        count. Of 104 tracked leads, 74 were genuine enquiries, 13 were not real opportunities, and
+        17 were calls that reached the after-hours voicemail without a message being left, so they
+        cannot be judged either way.</p>
+    </div>
+    <div class="surf" >
+      <div class="surf-row"><span>Genuine, workable enquiries</span>
+        <span class="surf-bar"><span style="width:71.2%;background:var(--good)"></span></span><span class="surf-v">74</span></div>
+      <div class="surf-row"><span>Not a real opportunity</span>
+        <span class="surf-bar"><span style="width:12.5%;background:var(--s4)"></span></span><span class="surf-v">13</span></div>
+      <div class="surf-row"><span>Voicemail, no message left</span>
+        <span class="surf-bar"><span style="width:16.3%;background:var(--ink-3)"></span></span><span class="surf-v">17</span></div>
+    </div>
+
+    <h3 style="margin:1.4rem 0 .6rem;font-size:1.05rem">What the 13 disqualified leads tell us</h3>
+    <div class="prose">
+      <p><b>Eleven of the thirteen were people looking for household bin collection, not a dumpster.</b>
+        Callers wanting a missed garbage pickup chased up, asking about weekly residential service, or
+        trying to pay a bill they thought belonged to another local hauler. It is a persistent pattern
+        in this market: people searching for waste services do not always distinguish a roll-off
+        rental company from a sanitation route.</p>
+      <p>That is a solvable advertising problem rather than a sales one, and we acted on it in early
+        August. Eleven new negative keyword rules now block that traffic before it costs anything,
+        covering the general "waste management" family and the local hauler names those callers were
+        actually looking for.</p>
+      <p>The seventeen unanswered voicemails all rang outside opening hours, which is why they cannot
+        be counted either way.</p>
+    </div>
+  </section>
+
+  <!-- ============ ORGANIC ============ -->
+  <section>
+    <div class="sec-head"><h2>Organic search</h2><span class="note">site live since late June</span></div>
+    <div class="tiles">
+      <div class="tile"><div class="k">Impressions</div><div class="v">1,265</div><div class="s">July, in Google results</div></div>
+      <div class="tile"><div class="k">Clicks</div><div class="v">29</div><div class="s">July</div></div>
+      <div class="tile"><div class="k">Average position</div><div class="v">51.6</div><div class="s"><span class="pill attn">page 5</span></div></div>
+      <div class="tile"><div class="k">August so far</div><div class="v">305</div><div class="s">impressions in 6 days</div></div>
+    </div>
+    <div class="prose">
+      <p>The honest position is that organic search is early and the click numbers are small. The site
+        appeared in Google results 1,265 times in July and earned 29 clicks. Average ranking position
+        was 51.6, which is roughly page five, and page five does not generate clicks no matter how
+        good the listing is.</p>
+      <p>What matters more at this stage is the direction. The first six days of August already
+        produced 305 impressions, an annualised pace well ahead of July, and average position has
+        edged up to 48.4. Google is indexing and testing the site across a widening set of searches,
+        which is exactly what should happen in months two and three.</p>
+      <p>Your money page, <span style="font-family:var(--mono);font-size:.9em">/dumpster-rental/</span>,
+        is the clearest example: 531 impressions in July but only 5 clicks, because it is sitting at
+        position 49. The page is being seen by Google and shown to people. It is not yet ranked high
+        enough for them to click it. The work in August is aimed squarely at moving that position.</p>
+    </div>
+  </section>
+
+  <!-- ============ WORK ============ -->
+  <section>
+    <div class="sec-head"><h2>What we did</h2><span class="note">July and early August</span></div>
+    <div class="cols">
+      <div>
+        <h3 style="font-size:1rem;margin-bottom:.5rem">Advertising</h3>
+        <ul class="items">
+          <li>Reviewed every lead individually and confirmed which were real opportunities.</li>
+          <li>Added 11 negative keyword rules to stop the household bin collection traffic described above.</li>
+          <li>Moved the "Dumpster Sizes &amp; Pricing" ad link to the main dumpster rental page. It had been sending your most interested visitors to a page that quoted a price without giving them a way to act on it.</li>
+          <li>Retired the "Areas We Serve" ad link, which was the most expensive destination in the account per enquiry.</li>
+          <li>Confirmed all eight ads are approved and running, including the two construction ads that were in review.</li>
+          <li>Tidied the conversion tracking so reported lead numbers reflect one lead per lead.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:1rem;margin-bottom:.5rem">Website and organic</h3>
+        <ul class="items">
+          <li>Published four new guides covering permits, what can go in a dumpster, mattress disposal and estate cleanouts.</li>
+          <li>Rewrote the dumpster rental page title to lead with pricing, to earn more clicks at whatever position it holds.</li>
+          <li>Fixed a duplicated business name across 28 page titles that was wasting space in Google results.</li>
+          <li>Corrected page titles and descriptions that were being cut short in search results.</li>
+          <li>Brought the blog index up to date so all seven published guides are reachable.</li>
+          <li>Removed low-value author pages from Google's index so they stop competing with real pages.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMING UP ============ -->
+  <section>
+    <div class="sec-head"><h2>August priorities</h2></div>
+    <div class="goal"><b>1. Reach $10,000 in spend before 21 August.</b> This unlocks the $20,000
+      credit and is the highest-value action available to the account this month. On current pace we
+      expect to cross it around 19 August. We are checking daily.</div>
+    <div class="goal"><b>2. Get the Google Business Profile verified.</b> Local searches put a map of
+      nearby businesses above the ordinary results, and an unverified profile cannot appear there or
+      collect reviews. Until it is verified, that entire route to enquiries is closed to you, so this
+      is a priority for the month.</div>
+    <div class="goal"><b>3. Hold cost per quotable lead near $75.</b> The negative keywords added in
+      early August should help by removing spend on calls that were never going to become jobs.</div>
+    <div class="goal"><b>4. Move the dumpster rental page off page five.</b> Internal linking and
+      continued publishing are aimed at this. It is the page most likely to turn organic visibility
+      into actual enquiries.</div>
+    <div class="goal"><b>5. Review bidding after 17 August.</b> Conversion tracking changed at the
+      start of August, and we want a clean run of data before making bidding changes rather than
+      reacting to a partial picture.</div>
+
+  </section>
+
+  <div class="foot">
+    <p style="margin:0">Advertising figures are taken directly from Google Ads for 1 to 31 July 2026.
+      Lead counts and quality come from call tracking, where every call and form was reviewed
+      individually. Organic figures are from Google Search Console. Credit progress reflects total
+      account spend through 6 August 2026.</p>
+  </div>
+
+</div>
+
+</body>
+</html>
