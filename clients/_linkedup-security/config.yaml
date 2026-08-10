@@ -1,3 +1,10 @@
+# DISABLED 2026-08-10: LinkedUp Security is not a client at the moment. The
+# WhatConverts profile 165650 has been removed on their side, so every batch
+# run failed with `WC API 410 ... {"error_message":"Invalid profile_id."}` and
+# alerted to Discord #alerts. The leading underscore on this directory is the
+# skip convention in lead_tracker/run-all.sh (and ads_report/run-all.sh).
+# To re-enable: confirm a live WC profile id first, then rename the directory
+# back to `linkedup-security`.
 display_name: "LinkedUp Security"
 
 wc_creds: ~/shapeshift-reports/.secrets/whatconverts.env
