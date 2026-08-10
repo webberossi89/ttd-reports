@@ -2428,3 +2428,123 @@ exceed real leads, and [3] still shows the gclid on these calls,
 the phantom conversions have posted. Fix: exclude IP 76.49.139.192
 in WhatConverts + GA4, and remove the email in the WC dashboard.
 
+======================================================================
+MCI phantom-conversion check run 2026-08-09T11:00:02
+======================================================================
+
+[1] WC All Leads (170414) conversions 2026-07-08..today, by campaign:
+   2026-07-08   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-08   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-10   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-11   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-12   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-13   5.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-13   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-14   3.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-14  0.666666  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-15   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-15  0.333334  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-16   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-16   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-17   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-18   3.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-18   4.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-20   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-20   4.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-21   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-21   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-22   1.5  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-22   0.5  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-23   3.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-24   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-27   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-28   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-28   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-29   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-29   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-30   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-31   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-01   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-01   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-08-02   3.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-08-03   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-03   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-08-04  0.333333  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-04  0.333333  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-08-05   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-05  1.333334  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-08-06   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-06   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+
+[2] gclid origin (click_view):
+   click 2026-07-08  campaign=Search - AI Max - Dumpsters - SS 6.24.26
+
+[3] WhatConverts lead state:
+   lead 245871181: email='jaredwebber1989@gmail.com' quotable='No' gclid_present=True
+   lead 245826726: email='jaredwebber1989@gmail.com' quotable='No' gclid_present=True
+
+Interpretation: if [1] shows AI Max conversions on 07-08 that
+exceed real leads, and [3] still shows the gclid on these calls,
+the phantom conversions have posted. Fix: exclude IP 76.49.139.192
+in WhatConverts + GA4, and remove the email in the WC dashboard.
+
+======================================================================
+MCI phantom-conversion check run 2026-08-09T11:00:02
+======================================================================
+
+[1] WC All Leads (170414) conversions 2026-07-08..today, by campaign:
+   2026-07-08   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-08   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-10   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-11   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-12   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-13   5.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-13   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-14   3.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-14  0.666666  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-15   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-15  0.333334  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-16   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-16   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-17   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-18   3.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-18   4.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-20   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-20   4.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-21   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-21   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-22   1.5  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-22   0.5  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-23   3.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-24   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-27   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-28   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-28   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-29   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-07-29   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-30   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-07-31   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-01   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-01   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-08-02   3.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-08-03   2.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-03   2.0  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-08-04  0.333333  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-04  0.333333  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-08-05   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-05  1.333334  Search - AI Max - Dumpsters - SS 6.24.26
+   2026-08-06   1.0  Search - Dumpster Rentals - SS 6.24.26
+   2026-08-06   1.0  Search - AI Max - Dumpsters - SS 6.24.26
+
+[2] gclid origin (click_view):
+   click 2026-07-08  campaign=Search - AI Max - Dumpsters - SS 6.24.26
+
+[3] WhatConverts lead state:
+   lead 245871181: email='jaredwebber1989@gmail.com' quotable='No' gclid_present=True
+   lead 245826726: email='jaredwebber1989@gmail.com' quotable='No' gclid_present=True
+
+Interpretation: if [1] shows AI Max conversions on 07-08 that
+exceed real leads, and [3] still shows the gclid on these calls,
+the phantom conversions have posted. Fix: exclude IP 76.49.139.192
+in WhatConverts + GA4, and remove the email in the WC dashboard.
+
