@@ -26,19 +26,35 @@ ga4_property_id: "458649778"
 # wc_lead_source: N/A
 
 # GA4 conversion events to track
-# These should match events configured in your GA4 property
+# VERIFIED for July 2026 reporting:
+# - generate_lead: Website form submissions (verified via direct confirmation)
+#
+# Other events (form_submit, phone_call, consultation_booked) are unverified
+# for this client and will not be included in lead totals until verified.
+
 ga4_events:
-  - name: "inquiry_form"
-    event_name: "form_submit"
-    description: "Contact form submissions"
-  
-  - name: "phone_call"
-    event_name: "phone_call"
-    description: "Phone calls from website"
-  
-  - name: "consultation_request"
-    event_name: "consultation_booked"
-    description: "Consultation/meeting bookings"
+  # VERIFIED - July 2026 reporting only
+  - name: "website_forms"
+    event_name: "generate_lead"
+    description: "Form submissions on website (VERIFIED)"
+    status: "verified"
+
+  # UNVERIFIED - not included in July 2026 report
+  # (These may be re-enabled in future reporting periods after verification)
+  # - name: "inquiry_form"
+  #   event_name: "form_submit"
+  #   description: "Contact form submissions (UNVERIFIED)"
+  #   status: "unverified"
+  #
+  # - name: "phone_call"
+  #   event_name: "phone_call"
+  #   description: "Phone calls from website (UNVERIFIED)"
+  #   status: "unverified"
+  #
+  # - name: "consultation_request"
+  #   event_name: "consultation_booked"
+  #   description: "Consultation/meeting bookings (UNVERIFIED)"
+  #   status: "unverified"
 
 # Reporting periods to include in monthly report
 # Will be populated by the reporting engine
