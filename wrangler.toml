@@ -1,0 +1,10 @@
+name = "ttd-reports"
+type = "javascript"
+account_id = "48605b104f81488883237e8167ed3c62"
+workers_dev = true
+route = ""
+zone_id = ""
+
+[env.production]
+name = "ttd-reports"
+routes = [{ pattern = "ttd-reports.pages.dev/*", zone_name = "ttd-reports.pages.dev" }]
