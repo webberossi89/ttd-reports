@@ -1,0 +1,49 @@
+# Thomas Town Digital - Agency Report
+# GA4-only conversions (no Google Ads, no WhatConverts)
+# 
+# This is the agency's own internal performance report, showing SEO and
+# organic channel conversions tracked in GA4.
+
+client: thomastown-digital
+display_name: Thomas Town Digital
+
+# No Google Ads account (agency is SEO-focused)
+# ads_creds: N/A
+# search_pmax_video_account: N/A
+# lsa_account: N/A
+
+# GA4 property for conversion tracking
+# Property ID: verify from your GA4 account (GA4 > Admin > Properties)
+ga4_property_id: "458649778"
+
+# No Google Sheets report for paid metrics (no Google Ads to report)
+# All tracking comes from GA4 events
+# sheets_creds: N/A
+# spreadsheet_id: N/A
+# tab_name: N/A
+
+# No WhatConverts lead tracking (using GA4 conversions instead)
+# wc_lead_source: N/A
+
+# GA4 conversion events to track
+# These should match events configured in your GA4 property
+ga4_events:
+  - name: "inquiry_form"
+    event_name: "form_submit"
+    description: "Contact form submissions"
+  
+  - name: "phone_call"
+    event_name: "phone_call"
+    description: "Phone calls from website"
+  
+  - name: "consultation_request"
+    event_name: "consultation_booked"
+    description: "Consultation/meeting bookings"
+
+# Reporting periods to include in monthly report
+# Will be populated by the reporting engine
+# months: ["2026-07", "2026-08"]  # example
+
+# Optional: Local rank / GBP data (phase 2)
+# gbp_profile: N/A
+# gbp_location_id: N/A
