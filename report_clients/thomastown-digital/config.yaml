@@ -42,7 +42,7 @@ ga4_events:
 
 # Reporting periods to include in monthly report
 # Will be populated by the reporting engine
-# months: ["2026-07", "2026-08"]  # example
+reporting_period: "2026-07"
 
 # Optional: Local rank / GBP data (phase 2)
 # gbp_profile: N/A
